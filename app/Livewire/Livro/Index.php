@@ -4,7 +4,9 @@ namespace App\Livewire\Livro;
 
 use App\Models\Livro;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
+#[Layout('layouts.app')]
 class Index extends Component
 {
     public $livros;
