@@ -2,22 +2,21 @@
 
 namespace App\Livewire\Livro;
 
-use App\Models\Livro;
+use App\Models\Editora;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.app')]
-class Index extends Component
+class Editoras extends Component
 {
-    public $livros;
-    
+    public $editoras;
+
     public function mount()
     {
-        $this->livros = Livro::with('autores', 'editora')->get();
+        $this->editoras = Editora::with('livros')->get();
     }
-
     public function render()
     {
-        return view('livewire.livro.index');
+        return view('livewire.editoras');
     }
 }

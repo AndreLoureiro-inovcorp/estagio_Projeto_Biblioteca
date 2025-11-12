@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Editora;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +20,9 @@ class LivroFactory extends Factory
         return [
             'isbn' => fake()->isbn13(),
             'nome' => fake()->sentence(3),
-            'editora_id' => \App\Models\Editora::factory(),
+            'editora_id' => Editora::factory(),
             'bibliografia' => fake()->paragraph(3),
-            'imagem_capa' => fake()->imageUrl(300, 400, 'books', true, 'livro'),
+            'imagem_capa' => 'https://picsum.photos/200/300',
             'preco' => fake()->randomFloat(2, 10, 200),
         ];
     }

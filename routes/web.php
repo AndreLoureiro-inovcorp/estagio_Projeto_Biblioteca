@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\LivroController;
-use App\Livewire\Livro\Create;
-use App\Livewire\Livro\Index;
+use App\Livewire\Livro\Autores as LivewireAutores;
+use App\Livewire\Livro\Editoras as LivewireEditoras;
+use App\Livewire\Livro\Livros as LivewireLivros;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/livros', Index::class)->name('livros.index');
-Route::get('/livros/create', Create::class)->name('livros.create');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/livros', LivewireLivros::class)->name('livros.index');
+    Route::get('/autores', LivewireAutores::class)->name('autores.index');
+    Route::get('/editoras', LivewireEditoras::class)->name('editoras.index');
+});
 
 Route::middleware([
     'auth:sanctum',

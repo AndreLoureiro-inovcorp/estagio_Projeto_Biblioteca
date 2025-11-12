@@ -18,7 +18,7 @@ class AutorFactory extends Factory
     {
         return [
             'nome' => fake()->name(),
-            'foto' => fake()->imageUrl(200, 200, 'people', true, 'autor'),
+            'foto' => 'https://picsum.photos/100/100',
         ];
     }
 }

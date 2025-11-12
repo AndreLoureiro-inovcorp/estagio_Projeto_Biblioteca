@@ -18,7 +18,7 @@ class EditoraFactory extends Factory
     {
         return [
             'nome' => fake()->company(),
-            'logotipo' => fake()->imageUrl(200, 200, 'business', true, 'editora'),
+            'logotipo' => 'https://picsum.photos/100/100',
         ];
     }
 }
