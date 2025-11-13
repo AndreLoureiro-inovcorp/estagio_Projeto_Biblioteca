@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Livro\Autores as LivewireAutores;
-use App\Livewire\Livro\Editoras as LivewireEditoras;
-use App\Livewire\Livro\Livros as LivewireLivros;
+use App\Livewire\Biblioteca\Autores as LivewireAutores;
+use App\Livewire\Biblioteca\Editoras as LivewireEditoras;
+use App\Livewire\Biblioteca\Livros as LivewireLivros;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,3 +24,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+

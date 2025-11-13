@@ -1,27 +1,41 @@
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Autores') }}
-    </h2>
-</x-slot>
+<div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Autores') }}
+        </h2>
+    </x-slot>
 
-<div class="flex justify-center mt-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($autores as $autor)
-        <div class="card bg-base-100 w-80 shadow-md rounded-2xl overflow-hidden">
-            <figure>
-                <img src="{{ $autor->foto ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
-                    alt="{{ $autor->nome }}"
-                    class="w-full h-60 object-cover" />
-            </figure>
-            <div class="card-body space-y-2">
-                <h2 class="card-title text-lg font-semibold">{{ $autor->nome }}</h2>
-                <p class="text-sm"><strong>Bio:</strong> {{ Str::limit($autor->biografia, 100) ?? 'Sem informação' }}</p>
-                <p class="text-sm"><strong>Total de livros:</strong> {{ $autor->livros->count() }}</p>
-                <div class="card-actions justify-end mt-4">
-                    <a href="#" class="btn btn-primary btn-sm rounded-full">Ver Mais</a>
+    <div class="max-w-6xl px-4 mb-6 mt-4 flex gap-4">
+        <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por autor"
+            class="max-w-[12.5rem] w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3">
+        </input>
+        <select wire:model.live="ordenarPorNome"
+            class="max-w-[12.5rem] w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3">
+            <option value=" ">Ordena por nome</option>
+            <option value="asc">Ascendente (A-Z)</option>
+            <option value="desc">Descendente (Z-A)</option>
+        </select>
+    </div>
+
+    <div class="flex justify-center mt-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($autores as $autor)
+            <div class="card bg-base-100 w-80 shadow-md rounded-2xl px-4 py-6">
+                <figure>
+                    <img src="{{ $autor->foto ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
+                        alt="{{ $autor->nome }}"
+                        class="w-full h-60 object-cover" />
+                </figure>
+                <div class="card-body space-y-2">
+                    <h2 class="card-title text-lg font-semibold">{{ $autor->nome }}</h2>
+                    <p class="text-sm"><strong>Bio:</strong> {{ Str::limit($autor->biografia, 100) ?? 'Sem informação' }}</p>
+                    <p class="text-sm"><strong>Total de livros:</strong> {{ $autor->livros->count() }}</p>
+                    <div class="card-actions justify-end mt-4">
+                        <a href="#" class="btn btn-primary btn-sm rounded-full">Ver Mais</a>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </div>

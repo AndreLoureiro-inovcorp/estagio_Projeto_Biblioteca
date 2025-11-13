@@ -16,9 +16,6 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex justify-between">
                     @auth
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
                     <x-nav-link href="{{ route('livros.index') }}" :active="request()->routeIs('livros.*')">
                         {{ __('Livros') }}
                     </x-nav-link>
@@ -34,9 +31,11 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+
+
                 <div class="ms-3 relative">
+                    <!-- Teams Dropdown -->
+                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <x-dropdown align="right" width="60">
                         <x-slot name="trigger">
                             <span class="inline-flex rounded-md">
@@ -167,12 +166,17 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @auth
             <x-responsive-nav-link href="{{ route('livros.index') }}" :active="request()->routeIs('livros.*')">
                 {{ __('Livros') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('autores.index') }}" :active="request()->routeIs('autores.*')">
+                {{ __('Autores') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('editoras.index') }}" :active="request()->routeIs('editoras.*')">
+                {{ __('Editoras') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
