@@ -53,7 +53,7 @@
                     @endif
 
                     <div class="card-actions justify-end mt-4">
-                        <a href="#" class="btn btn-primary btn-sm rounded-full">Ver Mais</a>
+                        <a href="{{ route('livros.show', $livro->id) }}" class="text-blue-600 hover:underline">Ver Mais</a>
                     </div>
                 </div>
             </div>
