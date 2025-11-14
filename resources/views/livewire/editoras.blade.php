@@ -5,12 +5,12 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-6xl px-4 mb-6 mt-4 flex gap-4">
+    <div class="max-w-6xl px-4 mb-6 mt-4 flex flex-wrap gap-4">
         <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por editora"
-            class="max-w-[12.5rem] w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3">
-        </input>
+            class="input input-bordered w-full max-w-xs rounded-xl" />
+
         <select wire:model.live="ordenarPorNome"
-            class="max-w-[12.5rem] w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3">
+            class="select select-bordered w-full max-w-xs rounded-xl">
             <option value=" ">Ordena por nome</option>
             <option value="asc">Ascendente (A-Z)</option>
             <option value="desc">Descendente (Z-A)</option>
@@ -20,7 +20,7 @@
     <div class="flex justify-center mt-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($editoras as $editora)
-            <div class="card bg-base-100 w-80 shadow-md rounded-2xl px-4 py-6 overflow-hidden">
+            <div class="card bg-base-100 w-80 shadow-md rounded-2xl overflow-hidden">
                 <figure class="bg-gray-100">
                     <img src="{{ $editora->logotipo ?? 'https://via.placeholder.com/300x120?text=Editora' }}"
                         alt="{{ $editora->nome }}"

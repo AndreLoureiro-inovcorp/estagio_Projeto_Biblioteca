@@ -5,29 +5,37 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-4xl mx-auto mt-8 bg-base-100 shadow-md rounded-2xl px-6 py-8">
-        <figure>
-            <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
-                alt="{{ $livro->nome }}" class="w-full object-cover rounded-md mb-4 mx-auto" />
-        </figure>
+    <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
+        <div class="flex flex-col sm:flex-row items-start gap-6">
+            <figure class="flex-shrink-0">
+                <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
+                    alt="{{ $livro->nome }}"
+                    class="w-48 h-64 object-cover rounded-lg shadow-md" />
+            </figure>
 
-        <h1 class="text-2xl font-semibold mb-2">{{ $livro->nome }}</h1>
-        <p><strong>ISBN:</strong> {{ $livro->isbn }}</p>
-        <p><strong>Editora:</strong> {{ $livro->editora->nome ?? 'N/A' }}</p>
-        <p><strong>Autores:</strong>
-            @forelse ($livro->autores as $autor)
-            {{ $autor->nome }}@if (!$loop->last), @endif
-            @empty
-            <span class="italic text-gray-400">Sem autores</span>
-            @endforelse
-        </p>
-        <p><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
+            <div class="space-y-2 min-w-0 break-words">
+                <h1 class="text-2xl font-semibold">{{ $livro->nome }}</h1>
+                @if ($livro->bibliografia)
+                <div>
+                    <h2 class="font-semibold">Bibliografia</h2>
+                    <p class="text-sm text-gray-600 break-words">{{ $livro->bibliografia }}</p>
+                </div>
+                @endif
 
-        @if ($livro->bibliografia)
-        <div class="mt-4">
-            <h2 class="font-semibold">Bibliografia</h2>
-            <p class="text-sm text-gray-600">{{ $livro->bibliografia }}</p>
+                <p><strong>Editora:</strong> {{ $livro->editora->nome ?? 'N/A' }}</p>
+                <p><strong>Autores:</strong>
+                    @forelse ($livro->autores as $autor)
+                    {{ $autor->nome }}@if (!$loop->last), @endif
+                    @empty
+                    <span class="italic text-gray-400">Sem autores</span>
+                    @endforelse
+                </p>
+                <p><strong>ISBN:</strong> {{ $livro->isbn }}</p>
+                <p><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
+            </div>
         </div>
-        @endif
     </div>
+    <a href="{{ route('livros.index') }}" class="btn btn-outline btn-sm mb-4">
+        ← Voltar à lista de livros
+    </a>
 </div>
