@@ -21,7 +21,6 @@ class Livros extends Component
 
     public function mount()
     {
-        // carregar lista de autores para o dropdown
         $this->autores = Autor::orderBy('nome')->get();
     }
 
@@ -35,19 +34,17 @@ class Livros extends Component
 
         $query = Livro::with(['autores', 'editora']);
 
-        // Filtro por autor
+
         if ($this->autorSelecionado) {
             $query->whereHas('autores', function ($q) {
                 $q->where('autores.id', $this->autorSelecionado);
             });
         }
 
-        // Filtro por nome do livro
         if ($this->pesquisa) {
             $query->where('nome', 'like', '%' . $this->pesquisa . '%');
         }
 
-        // Ordenação por nome se o utilizador escolher
         if ($this->ordenarPorNome === 'asc') {
             $query->orderBy('nome', 'asc');
         } elseif ($this->ordenarPorNome === 'desc') {

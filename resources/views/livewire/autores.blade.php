@@ -28,7 +28,7 @@
                 </figure>
                 <div class="card-body space-y-2">
                     <h2 class="card-title text-lg font-semibold">{{ $autor->nome }}</h2>
-                    <p class="text-sm"><strong>Bio:</strong> {{ Str::limit($autor->biografia, 100) ?? 'Sem informação' }}</p>
+                    <p class="text-sm"><strong>Bio:</strong>Eu sou um autor...</p>
                     <p class="text-sm"><strong>Total de livros:</strong> {{ $autor->livros->count() }}</p>
                 </div>
             </div>
