@@ -19,8 +19,8 @@ class LivroFactory extends Factory
     {
         return [
             'isbn' => fake()->isbn13(),
-            'nome' => fake()->sentence(3),
-            'editora_id' => Editora::factory(),
+            'nome' => fake()->words(3, true),
+            'editora_id' => Editora::inRandomOrder()->first()->id,
             'bibliografia' => fake()->paragraph(3),
             'imagem_capa' => 'https://picsum.photos/200/300',
             'preco' => fake()->randomFloat(2, 10, 200),

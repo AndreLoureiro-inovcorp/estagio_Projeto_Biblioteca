@@ -21,16 +21,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($editoras as $editora)
             <div class="card bg-base-100 w-80 shadow-md rounded-2xl overflow-hidden">
-                <figure class="bg-gray-100">
-                    <img src="{{ $editora->logotipo ?? 'https://via.placeholder.com/300x120?text=Editora' }}"
-                        alt="{{ $editora->nome }}"
-                        class="w-full h-40 object-contain p-4" />
-                </figure>
-                <div class="card-body space-y-2">
-                    <h2 class="card-title text-lg font-semibold">{{ $editora->nome }}</h2>
-                    <div class="card-actions justify-end mt-4">
-                        <a href="#" class="btn btn-primary btn-sm rounded-full">Ver Mais</a>
+
+                <div class="avatar justify-center pt-4">
+                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src="{{ $editora->logotipo ?? 'https://via.placeholder.com/150?text=Editora' }}" alt="{{ $editora->nome }}" />
                     </div>
+                </div>
+
+                <div class="card-body items-center text-center space-y-2">
+                    <h2 class="card-title text-lg font-semibold">{{ $editora->nome }}</h2>
                 </div>
             </div>
             @endforeach

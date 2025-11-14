@@ -14,7 +14,7 @@ class LivroSeeder extends Seeder
      */
     public function run(): void
     {
-        Livro::factory()->count(20)->create()->each(function ($livro) {
+        Livro::factory()->count(15)->create()->each(function ($livro) {
 
             $autores = Autor::inRandomOrder()->take(rand(1, 3))->pluck('id');
             $livro->autores()->attach($autores);

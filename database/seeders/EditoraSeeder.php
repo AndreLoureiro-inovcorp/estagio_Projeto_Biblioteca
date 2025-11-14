@@ -13,6 +13,6 @@ class EditoraSeeder extends Seeder
      */
     public function run(): void
     {
-        Editora::factory()->count(5)->create();
+        Editora::factory()->count(10)->create();
     }
 }

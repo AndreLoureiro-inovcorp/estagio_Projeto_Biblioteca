@@ -35,7 +35,9 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('livros.index') }}" class="btn btn-outline btn-sm mb-4">
-        ← Voltar à lista de livros
-    </a>
+    <div class="max-w-4xl mx-auto mt-6 px-4">
+        <a href="{{ route('livros.index') }}" class="btn btn-outline btn-sm rounded-full">
+            ← Voltar
+        </a>
+    </div>
 </div>

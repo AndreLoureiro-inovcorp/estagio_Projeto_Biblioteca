@@ -44,8 +44,8 @@
                     </p>
                     <p class="text-sm"><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
 
-                    <div class="card-actions justify-end mt-4 mt-auto">
-                        <a href="{{ route('livros.show', $livro->id) }}" class="text-blue-600 hover:underline">Ver Mais</a>
+                    <div class="card-actions justify-end ">
+                        <a href="{{ route('livros.show', $livro->id) }}" class="btn btn-info">Ver Mais</a>
                     </div>
 
                 </div>
