@@ -6,6 +6,8 @@ use App\Models\Livro;
 use App\Models\Autor;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use App\Exports\LivrosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 #[Layout('layouts.app')]
 
@@ -23,9 +25,14 @@ class Livros extends Component
         $this->autores = Autor::orderBy('nome')->get();
     }
 
+    public function exportar()
+    {
+        return Excel::download(new LivrosExport, 'livros_' . date('Y-m-d_H-i-s') . '.xlsx');
+    }
+
     public function render()
     {
-        
+
         $query = Livro::with(['autores', 'editora']);
 
         // Filtro por autor
@@ -52,7 +59,6 @@ class Livros extends Component
 
         return view('livewire.livros', [
             'livros' => $livros,
-            'authors' => $this->autores,
         ]);
     }
 }
