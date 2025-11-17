@@ -66,4 +66,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function requisicoes()
+    {
+        return $this->hasMany(Requisicao::class);
+    }
+
+    public function requisicoesAtivas()
+    {
+        return $this->hasMany(Requisicao::class)->where('estado', 'ativa');
+    }
+
+    public function podeRequisitar()
+    {
+        return $this->requisicoesAtivas()->count() < 3;
+    }
+
+    public function numeroDeLivrosRequisitados()
+    {
+        return $this->requisicoesAtivas()->count();
+    }
 }

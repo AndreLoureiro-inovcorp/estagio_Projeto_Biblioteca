@@ -6,23 +6,26 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('livros.index') }}">
-                        <img src="{{ asset('images/logo1.png') }}" alt="Logo da Biblioteca" class="h-9 w-auto rounded-2xl"/>
+                        <img src="{{ asset('images/logo1.png') }}" alt="Logo da Biblioteca" class="h-9 w-auto rounded-2xl" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @role('admin')
                     <x-nav-link href="{{ route('livros.index') }}" :active="request()->routeIs('livros.*')">
                         {{ __('Livros') }}
                     </x-nav-link>
-                    @endrole
                     <x-nav-link href="{{ route('autores.index') }}" :active="request()->routeIs('autores.*')">
                         {{ __('Autores') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('editoras.index') }}" :active="request()->routeIs('editoras.*')">
                         {{ __('Editoras') }}
                     </x-nav-link>
+                    @role('admin')
+                    <x-nav-link href="{{ route('admin.utilizadores') }}">
+                        {{ __('Gerir Utilizadores') }}
+                    </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

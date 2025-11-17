@@ -20,15 +20,12 @@ class GerirUtilizadores extends Component
     {
         $user = User::find($userId);
         
-        // Remove role cidadao se tiver
         $user->removeRole('cidadao');
         
-        // Adiciona role admin
         $user->assignRole('admin');
         
         session()->flash('message', 'Utilizador promovido a Admin!');
         
-        // Recarrega lista
         $this->mount();
     }
 
@@ -36,15 +33,12 @@ class GerirUtilizadores extends Component
     {
         $user = User::find($userId);
         
-        // Remove role admin
         $user->removeRole('admin');
         
-        // Adiciona role cidadao
         $user->assignRole('cidadao');
         
         session()->flash('message', 'Admin removido. Agora é Cidadão.');
         
-        // Recarrega lista
         $this->mount();
     }
 

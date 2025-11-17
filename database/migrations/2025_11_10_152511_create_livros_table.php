@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('editora_id')->constrained()->onDelete('cascade');
             $table->text('bibliografia')->nullable();
             $table->string('imagem_capa')->nullable();
+            $table->boolean('disponivel')->default(true)->after('imagem_capa');
             $table->decimal('preco', 8, 2);
             $table->timestamps();
         });
