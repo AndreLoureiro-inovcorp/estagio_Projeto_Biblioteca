@@ -12,9 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @role('admin')
                     <x-nav-link href="{{ route('livros.index') }}" :active="request()->routeIs('livros.*')">
                         {{ __('Livros') }}
                     </x-nav-link>
+                    @endrole
                     <x-nav-link href="{{ route('autores.index') }}" :active="request()->routeIs('autores.*')">
                         {{ __('Autores') }}
                     </x-nav-link>

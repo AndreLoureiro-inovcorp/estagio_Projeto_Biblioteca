@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/livros', LivewireLivros::class)->name('livros.index');
-    Route::get('/autores', LivewireAutores::class)->name('autores.index');
+    Route::get('/autores', LivewireAutores::class)->name('autores.index')->middleware('role:admin');
     Route::get('/editoras', LivewireEditoras::class)->name('editoras.index');
     Route::get('/livros/{livro}', LivroShow::class)->name('livros.show');
     
@@ -24,7 +24,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('livros.index');
     })->name('dashboard');
 });
 
