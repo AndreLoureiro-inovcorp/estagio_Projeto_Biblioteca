@@ -21,6 +21,9 @@
                     <x-nav-link href="{{ route('editoras.index') }}" :active="request()->routeIs('editoras.*')">
                         {{ __('Editoras') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('requisicoes.index') }}" :active="request()->routeIs('requisicoes.*')">
+                        {{ __('Requisições') }}
+                    </x-nav-link>
                     @role('admin')
                     <x-nav-link href="{{ route('admin.utilizadores') }}">
                         {{ __('Gerir Utilizadores') }}

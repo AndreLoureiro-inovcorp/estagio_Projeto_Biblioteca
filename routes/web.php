@@ -3,11 +3,14 @@
 use App\Livewire\Biblioteca\Autores as LivewireAutores;
 use App\Livewire\Biblioteca\Editoras as LivewireEditoras;
 use App\Livewire\Biblioteca\Livros as LivewireLivros;
-use \App\Livewire\Admin\GerirUtilizadores;
+use App\Livewire\Admin\GerirUtilizadores;
 use App\Livewire\Biblioteca\LivroShow;
 use App\Livewire\Biblioteca\LivrosGerir;
 use App\Livewire\Biblioteca\LivroCriar;
 use App\Livewire\Biblioteca\LivroEditar;
+use App\Livewire\Biblioteca\Requisicoes;
+use App\Livewire\Biblioteca\RequisicaoCriar;
+use App\Livewire\Biblioteca\RequisicaoConfirmarDevolucao;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,7 +19,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/livros', LivewireLivros::class)->name('livros.index');
-    Route::get('/autores', LivewireAutores::class)->name('autores.index')->middleware('role:admin');
+    Route::get('/autores', LivewireAutores::class)->name('autores.index');
     Route::get('/editoras', LivewireEditoras::class)->name('editoras.index');
     Route::get('/livros/{livro}', LivroShow::class)->name('livros.show');
 });
@@ -28,6 +31,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/livros/{livro}/editar', LivroEditar::class)->name('livros.editar');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/requisicoes', Requisicoes::class)->name('requisicoes.index');
+});
+
+Route::middleware(['auth', 'verified', 'role:cidadao'])->group(function () {
+    Route::get('/requisicoes/criar', RequisicaoCriar::class)->name('requisicao.criar');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
+});
 
 Route::middleware([
     'auth:sanctum',
