@@ -25,6 +25,9 @@
                     <x-nav-link href="{{ route('admin.utilizadores') }}">
                         {{ __('Gerir Utilizadores') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('admin.livros') }}">
+                        {{ __('Gerir Livros') }}
+                    </x-nav-link>
                     @endrole
                 </div>
             </div>
@@ -159,6 +162,14 @@
             <x-responsive-nav-link href="{{ route('editoras.index') }}" :active="request()->routeIs('editoras.*')">
                 {{ __('Editoras') }}
             </x-responsive-nav-link>
+            @role('admin')
+            <x-responsive-nav-link href="{{ route('admin.utilizadores') }}">
+                {{ __('Gerir Utilizadores') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('admin.livros') }}">
+                {{ __('Gerir Livros') }}
+            </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

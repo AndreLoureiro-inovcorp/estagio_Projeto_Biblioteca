@@ -5,6 +5,9 @@ use App\Livewire\Biblioteca\Editoras as LivewireEditoras;
 use App\Livewire\Biblioteca\Livros as LivewireLivros;
 use \App\Livewire\Admin\GerirUtilizadores;
 use App\Livewire\Biblioteca\LivroShow;
+use App\Livewire\Biblioteca\LivrosGerir;
+use App\Livewire\Biblioteca\LivroCriar;
+use App\Livewire\Biblioteca\LivroEditar;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,8 +19,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/autores', LivewireAutores::class)->name('autores.index')->middleware('role:admin');
     Route::get('/editoras', LivewireEditoras::class)->name('editoras.index');
     Route::get('/livros/{livro}', LivroShow::class)->name('livros.show');
-    Route::get('/admin/utilizadores', GerirUtilizadores::class)->name('admin.utilizadores')->middleware(['auth', 'role:admin']);
 });
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/utilizadores', GerirUtilizadores::class)->name('admin.utilizadores');
+    Route::get('/admin/livros', LivrosGerir::class)->name('admin.livros');
+    Route::get('/admin/livros/criar', LivroCriar::class)->name('livros.criar');
+    Route::get('/admin/livros/{livro}/editar', LivroEditar::class)->name('livros.editar');
+});
+
 
 Route::middleware([
     'auth:sanctum',
