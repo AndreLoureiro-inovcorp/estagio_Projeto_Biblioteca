@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('requisicaos', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_requesicao')->unique();
+            $table->string('numero_requisicao')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('livro_id')->constrained()->onDelete('restrict');
             $table->date('data_requisicao');

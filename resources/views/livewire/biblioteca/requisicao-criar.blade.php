@@ -7,14 +7,12 @@
 
     <div class="max-w-4xl mx-auto bg-base-100 shadow-md rounded-2xl p-6">
 
-        {{-- Alerta de erro --}}
         @if (session()->has('error'))
             <div class="alert alert-error mb-4">
                 <span>{{ session('error') }}</span>
             </div>
         @endif
 
-        {{-- Info do utilizador --}}
         <div class="bg-base-200 p-4 rounded-xl mb-6">
             <h3 class="text-lg font-semibold mb-2">Informação do Requisitante</h3>
             <div class="grid md:grid-cols-2 gap-4">
@@ -24,7 +22,6 @@
             </div>
         </div>
 
-        {{-- Formulário --}}
         <form wire:submit.prevent="criar">
             <div class="form-control mb-6">
                 <label class="label font-semibold">Seleciona o Livro *</label>
@@ -39,7 +36,6 @@
                 @enderror
             </div>
 
-            {{-- Detalhes do livro --}}
             @if($livroSelecionado)
                 <div class="bg-base-200 p-6 rounded-xl mb-6">
                     <div class="flex flex-col md:flex-row gap-6">

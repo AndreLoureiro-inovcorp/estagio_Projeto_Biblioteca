@@ -29,18 +29,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/livros', LivrosGerir::class)->name('admin.livros');
     Route::get('/admin/livros/criar', LivroCriar::class)->name('livros.criar');
     Route::get('/admin/livros/{livro}/editar', LivroEditar::class)->name('livros.editar');
+    Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/requisicoes', Requisicoes::class)->name('requisicoes.index');
-});
-
-Route::middleware(['auth', 'verified', 'role:cidadao'])->group(function () {
     Route::get('/requisicoes/criar', RequisicaoCriar::class)->name('requisicao.criar');
-});
-
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
 });
 
 Route::middleware([
