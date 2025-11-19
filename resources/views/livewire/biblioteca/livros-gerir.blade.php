@@ -29,9 +29,7 @@
         <div class="bg-base-100 shadow-md rounded-2xl px-6 py-8">
             <div class="flex flex-col sm:flex-row items-start gap-6">
                 <figure class="flex-shrink-0">
-                    <img src="{{ $livro->imagem_capa ? Storage::url($livro->imagem_capa) : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
-                        alt="{{ $livro->nome }}"
-                        class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
                 </figure>
 
                 <div class="flex-1 space-y-2 min-w-0 break-words">

@@ -6,11 +6,9 @@
     </x-slot>
 
     <div class="max-w-6xl px-4 mb-6 mt-4 flex flex-wrap gap-4">
-        <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por editora"
-            class="input input-bordered w-full max-w-xs rounded-xl" />
+        <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por editora" class="input input-bordered w-full max-w-xs rounded-xl" />
 
-        <select wire:model.live="ordenarPorNome"
-            class="select select-bordered w-full max-w-xs rounded-xl">
+        <select wire:model.live="ordenarPorNome" class="select select-bordered w-full max-w-xs rounded-xl">
             <option value=" ">Ordena por nome</option>
             <option value="asc">Ascendente (A-Z)</option>
             <option value="desc">Descendente (Z-A)</option>

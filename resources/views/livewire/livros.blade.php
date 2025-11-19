@@ -19,8 +19,7 @@
             <option value="desc">Descendente (Z-A)</option>
         </select>
 
-        <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por nome do livro"
-            class="input input-bordered w-full max-w-xs rounded-xl" />
+        <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por nome do livro" class="input input-bordered w-full max-w-xs rounded-xl" />
 
         <button wire:click="exportar" class="btn btn-success gap-2">
             Exportar livros
@@ -34,8 +33,7 @@
             <div class="card bg-base-100 w-80 shadow-md rounded-2xl px-4">
 
                 <figure>
-                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}"
-                        alt="{{ $livro->nome }}" class="w-full object-cover mt-4 rounded-2xl" />
+                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-full object-cover mt-4 rounded-2xl" />
                 </figure>
 
                 <div class="card-body space-y-2">

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('data_requisicao');
             $table->date('data_prevista_entrega');
             $table->date('data_entrega_real')->nullable();
+            $table->integer('dias_decorridos')->nullable();
             $table->enum('estado', ['ativa', 'entregue', 'atrasada'])->default('ativa');
             $table->string('foto_cidadao')->nullable();
             $table->boolean('reminder_enviado')->default(false);

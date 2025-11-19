@@ -35,6 +35,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/requisicoes', Requisicoes::class)->name('requisicoes.index');
     Route::get('/requisicoes/criar', RequisicaoCriar::class)->name('requisicao.criar');
+    Route::get('/livros/{livro}/historico', \App\Livewire\Biblioteca\LivroHistorico::class)->name('livros.historico');
+
 });
 
 Route::middleware([

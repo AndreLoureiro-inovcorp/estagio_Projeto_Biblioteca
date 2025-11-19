@@ -25,10 +25,10 @@
                         {{ __('Requisições') }}
                     </x-nav-link>
                     @role('admin')
-                    <x-nav-link href="{{ route('admin.utilizadores') }}">
+                    <x-nav-link href="{{ route('admin.utilizadores') }}" :active="request()->routeIs('admin.utilizadores')">
                         {{ __('Gerir Utilizadores') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('admin.livros') }}">
+                    <x-nav-link href="{{ route('admin.livros') }}" :active="request()->routeIs('admin.livros')">
                         {{ __('Gerir Livros') }}
                     </x-nav-link>
                     @endrole
@@ -131,8 +131,7 @@
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                    @click.prevent="$root.submit();">
+                                <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -206,8 +205,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-responsive-nav-link href="{{ route('logout') }}"
-                        @click.prevent="$root.submit();">
+                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>

@@ -21,7 +21,5 @@ class AdminUserSeeder extends Seeder
         ]);
 
         $admin->assignRole('admin');
-
-        echo "✅ Admin criado: admin@gmail.com\n";
     }
 }

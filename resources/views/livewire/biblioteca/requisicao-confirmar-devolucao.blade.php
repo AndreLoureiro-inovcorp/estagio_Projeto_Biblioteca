@@ -8,14 +8,14 @@
     <div class="max-w-4xl mx-auto bg-base-100 shadow-md rounded-2xl p-6">
 
         @if (session()->has('error'))
-            <div class="alert alert-error mb-4">
-                <span>{{ session('error') }}</span>
-            </div>
+        <div class="alert alert-error mb-4">
+            <span>{{ session('error') }}</span>
+        </div>
         @endif
         @if (session()->has('message'))
-            <div class="alert alert-success mb-4">
-                <span>{{ session('message') }}</span>
-            </div>
+        <div class="alert alert-success mb-4">
+            <span>{{ session('message') }}</span>
+        </div>
         @endif
 
         <div class="mb-6">
@@ -34,8 +34,7 @@
                         <div class="avatar">
                             <div class="w-16 h-16 rounded-full">
                                 <img src="{{ $requisicao->foto_cidadao 
-                                    ?? 'https://ui-avatars.com/api/?name=' . urlencode($requisicao->user->name) }}" 
-                                     alt="{{ $requisicao->user->name }}">
+                                    ?? 'https://ui-avatars.com/api/?name=' . urlencode($requisicao->user->name) }}" alt="{{ $requisicao->user->name }}">
                             </div>
                         </div>
                         <div>
@@ -49,12 +48,11 @@
                     <h4 class="text-sm font-semibold opacity-70 mb-2">Livro</h4>
                     <div class="flex gap-3">
                         @if($requisicao->livro->imagem_capa)
-                            <div class="avatar">
-                                <div class="w-16 h-20 rounded">
-                                    <img src="{{ Storage::url($requisicao->livro->imagem_capa) }}" 
-                                         alt="{{ $requisicao->livro->nome }}">
-                                </div>
+                        <div class="avatar">
+                            <div class="w-16 h-20 rounded">
+                                <img src="{{ Storage::url($requisicao->livro->imagem_capa) }}" alt="{{ $requisicao->livro->nome }}">
                             </div>
+                        </div>
                         @endif
                         <div>
                             <p class="font-semibold">{{ $requisicao->livro->nome }}</p>
@@ -76,14 +74,12 @@
                 </div>
                 <div>
                     <p class="text-sm opacity-70">Estado</p>
-                    @php 
-                        $atrasado = $requisicao->data_prevista_entrega < now();
-                    @endphp
-                    <span class="badge {{ $atrasado ? 'badge-error' : 'badge-info' }}">
+                    @php
+                    $atrasado = $requisicao->data_prevista_entrega < now(); @endphp <span class="badge {{ $atrasado ? 'badge-error' : 'badge-info' }}">
                         {{ $atrasado 
                             ? 'Atrasado ' . now()->diffInDays($requisicao->data_prevista_entrega) . ' dias' 
                             : 'No prazo' }}
-                    </span>
+                        </span>
                 </div>
             </div>
         </div>
@@ -94,35 +90,26 @@
 
                 <div class="form-control mb-4">
                     <label class="label font-semibold">Data Real de Entrega *</label>
-                    <input type="date" 
-                           wire:model="data_entrega_real" 
-                           class="input input-bordered @error('data_entrega_real') input-error @enderror" 
-                           min="{{ $requisicao->data_requisicao->format('Y-m-d') }}" 
-                           max="{{ now()->format('Y-m-d') }}">
+                    <input type="date" wire:model="data_entrega_real" class="input input-bordered @error('data_entrega_real') input-error @enderror" min="{{ $requisicao->data_requisicao->format('Y-m-d') }}" max="{{ now()->format('Y-m-d') }}">
                     @error('data_entrega_real')
-                        <span class="text-error text-sm mt-1">{{ $message }}</span>
+                    <span class="text-error text-sm mt-1">{{ $message }}</span>
                     @enderror
                     <span class="label-text-alt">Por padrão, a data de hoje está selecionada</span>
                 </div>
 
                 @if($data_entrega_real)
-                    @php
-                        $diasCalculados = \Carbon\Carbon::parse($requisicao->data_requisicao)
-                                        ->diffInDays(\Carbon\Carbon::parse($data_entrega_real));
-                        $diferenca = $diasCalculados - 5;
-                    @endphp
-                    <div class="alert {{ $diferenca > 0 ? 'alert-warning' : 'alert-success' }}">
-                        <p class="font-semibold">Total de dias com o livro: {{ $diasCalculados }} dias</p>
-                        <p class="text-sm">
-                            @if($diferenca > 0)
-                                Entrega com {{ $diferenca }} dia(s) de atraso
-                            @elseif($diferenca < 0)
-                                Entrega {{ abs($diferenca) }} dia(s) antes do prazo
-                            @else
-                                Entrega no prazo
-                            @endif
-                        </p>
-                    </div>
+                @php
+                $diasCalculados = \Carbon\Carbon::parse($requisicao->data_requisicao)
+                ->diffInDays(\Carbon\Carbon::parse($data_entrega_real));
+                $diferenca = $diasCalculados - 5;
+                @endphp
+                <div class="alert {{ $diferenca > 0 ? 'alert-warning' : 'alert-success' }}">
+                    <p class="font-semibold">Total de dias com o livro: {{ $diasCalculados }} dias</p>
+                    <p class="text-sm">
+                        @if($diferenca > 0)
+                        Entrega com {{ $diferenca }} dia(s) de atraso
+                        @elseif($diferenca < 0) Entrega {{ abs($diferenca) }} dia(s) antes do prazo @else Entrega no prazo @endif </p>
+                </div>
                 @endif
             </div>
 
