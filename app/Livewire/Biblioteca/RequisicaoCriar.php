@@ -6,8 +6,12 @@ use App\Models\Livro;
 use App\Models\Requisicao;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Mail\RequisicaoConfirmada;
+use App\Mail\NovaRequisicaoAdmin;
+use App\Models\User;
 
 #[Layout('layouts.app')]
 
@@ -75,7 +79,7 @@ class RequisicaoCriar extends Component
         $dataRequisicao = Carbon::today();
         $dataPrevistaEntrega = Carbon::today()->addDays(5);
 
-        Requisicao::create([
+        $requisicao = Requisicao::create([
             'numero_requisicao' => $numeroRequisicao,
             'user_id' => $user->id,
             'livro_id' => $livro->id,
@@ -86,6 +90,13 @@ class RequisicaoCriar extends Component
         ]);
 
         $livro->update(['disponivel' => false]);
+
+        Mail::to($user->email)->send(new RequisicaoConfirmada($requisicao));
+
+        $admins = User::role('admin')->get();
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->send(new NovaRequisicaoAdmin($requisicao));
+        }
 
         session()->flash('message', 'Requisição criada com sucesso! Número: '.$numeroRequisicao);
 
