@@ -70,7 +70,7 @@
         </div>
 
         <div class="flex justify-between">
-            <a href="{{ route('admin.livros') }}" class="btn btn-ghost">← Voltar</a>
+            <a href="{{ route('livros.gerir') }}" class="btn btn-ghost">← Voltar</a>
             <button type="submit" class="btn btn-primary">Guardar Alterações</button>
         </div>
     </form>

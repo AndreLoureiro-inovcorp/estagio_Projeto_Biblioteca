@@ -12,6 +12,8 @@ use App\Livewire\Biblioteca\Requisicoes;
 use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\RequisicaoConfirmarDevolucao;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\UtilizadorHistorico;
+use App\Livewire\Biblioteca\LivroHistorico;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,14 +31,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/livros', LivrosGerir::class)->name('admin.livros');
     Route::get('/admin/livros/criar', LivroCriar::class)->name('livros.criar');
     Route::get('/admin/livros/{livro}/editar', LivroEditar::class)->name('livros.editar');
+    Route::get('/admin/utilizadores/{user}/historico', UtilizadorHistorico::class)->name('admin.utilizador.historico');
     Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/requisicoes', Requisicoes::class)->name('requisicoes.index');
     Route::get('/requisicoes/criar', RequisicaoCriar::class)->name('requisicao.criar');
-    Route::get('/livros/{livro}/historico', \App\Livewire\Biblioteca\LivroHistorico::class)->name('livros.historico');
-
+    Route::get('/livros/{livro}/historico', LivroHistorico::class)->name('livros.historico');
 });
 
 Route::middleware([
