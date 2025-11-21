@@ -19,6 +19,6 @@
 
     <hr>
 
-    <p>Obrigado por utilizares a nossa biblioteca digital.</p>
+    <p>Obrigado por utilizares a nossa biblioteca!</p>
 </body>
 </html>

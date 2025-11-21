@@ -9,7 +9,7 @@
 
     <p>Olá {{ $requisicao->user->name }},</p>
 
-    <p>Este é um lembrete de que deves entregar o livro que requisitaste até <strong>{{ $requisicao->data_prevista_entrega->format('d/m/Y') }}</strong>.</p>
+    <p>O Último dia para fazeres a entrega do livro é amanhã: <strong>{{ $requisicao->data_prevista_entrega->format('d/m/Y') }}</strong>.</p>
 
     <p><strong>Livro:</strong> {{ $requisicao->livro->nome }}</p>
     <p><strong>Editora:</strong> {{ $requisicao->livro->editora->nome }}</p>
@@ -19,6 +19,6 @@
 
     <hr>
 
-    <p>Obrigado por utilizares a nossa biblioteca digital!</p>
+    <p>Obrigado por utilizares a nossa biblioteca!</p>
 </body>
 </html>
