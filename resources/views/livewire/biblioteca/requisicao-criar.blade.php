@@ -1,7 +1,9 @@
 <x-slot name="header">
-    <h2 class="text-xl font-semibold text-gray-800 leading-tight">
-        {{ __('Nova Requisição') }}
-    </h2>
+    <div class="flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800 leading-tight">
+            {{ __('Nova Requisição') }}
+        </h2>
+    </div>
 </x-slot>
 
 <div class="py-10">
@@ -15,9 +17,8 @@
 
         <div class="card bg-base-200 p-4 rounded-xl mb-6">
             <h3 class="text-lg font-semibold mb-4">Informação do Requisitante</h3>
-            <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex justify-between">
                 <p><strong>Nome:</strong> {{ auth()->user()->name }}</p>
-                <p><strong>Email:</strong> {{ auth()->user()->email }}</p>
                 <p><strong>Requisições Ativas:</strong> {{ auth()->user()->numeroDeLivrosRequisitados() }} / 3</p>
             </div>
         </div>
@@ -39,14 +40,17 @@
             @if($livroSelecionado)
             <div class="bg-base-200 p-6 rounded-xl mb-6 space-y-4">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <img src="{{ $livroSelecionado->imagem_capa ? Storage::url($livroSelecionado->imagem_capa) : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" class="w-32 h-48 object-cover rounded-md shadow">
-                    <div class="flex-1 space-y-1">
+                    <figure class="flex-shrink-0">
+                        <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                    </figure>
+
+                    <div class="flex-1 space-y-2">
                         <h3 class="text-xl font-bold">{{ $livroSelecionado->nome }}</h3>
                         <p><strong>ISBN:</strong> {{ $livroSelecionado->isbn }}</p>
                         <p><strong>Editora:</strong> {{ $livroSelecionado->editora->nome }}</p>
                         <p><strong>Autores:</strong>
                             @foreach($livroSelecionado->autores as $autor)
-                            <span class="badge badge-sm mr-1">{{ $autor->nome }}</span>
+                            {{ $autor->nome }}@if(!$loop->last), @endif
                             @endforeach
                         </p>
                         @if($livroSelecionado->bibliografia)
@@ -57,29 +61,29 @@
 
                 <div class="divider"></div>
 
-                <div class="grid md:grid-cols-3 text-center gap-4">
-                    <div>
-                        <p class="text-sm opacity-70">Data de Requisição</p>
-                        <p class="font-bold">{{ now()->format('d/m/Y') }}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="text-sm text-gray-500">Data de Requisição</p>
+                        <p class="text-lg font-bold">{{ now()->format('d/m/Y') }}</p>
                     </div>
-                    <div>
-                        <p class="text-sm opacity-70">Prazo Entrega</p>
-                        <p class="font-bold text-warning">{{ now()->addDays(5)->format('d/m/Y') }}</p>
-                    </div>
-                    <div>
-                        <p class="text-sm opacity-70">Dias Disponíveis</p>
-                        <p class="font-bold text-info">5 dias</p>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="text-sm text-gray-500">Prazo Entrega</p>
+                        <p class="text-lg font-bold text-yellow-600">{{ now()->addDays(5)->format('d/m/Y') }}</p>
                     </div>
                 </div>
             </div>
             @endif
 
-            <div class="flex justify-between">
-                <a href="{{ route('requisicoes.index') }}" class="btn btn-ghost">Cancelar</a>
-                <button type="submit" class="btn btn-primary text-white" @if(!$livroSelecionado) disabled @endif>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded transition" @if(!$livroSelecionado) disabled @endif>
                     Confirmar Requisição
                 </button>
             </div>
         </form>
+    </div>
+    <div class="max-w-4xl mx-auto mt-6 px-4">
+        <a href="{{ route('requisicoes.index') }}" class="btn btn-outline btn-sm rounded-full">
+            ← Voltar
+        </a>
     </div>
 </div>

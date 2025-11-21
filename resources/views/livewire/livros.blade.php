@@ -1,9 +1,12 @@
 <div>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800 leading-tight">
-            {{ __('Livros Disponíveis') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-800 leading-tight">
+                {{ __('Livros Disponíveis') }}
+            </h2>
+        </div>
     </x-slot>
+
 
     <div class="max-w-6xl px-4 mb-6 mt-4 flex flex-wrap gap-4">
         <select id="author" wire:model.live="autorSelecionado" class="select select-bordered w-full max-w-xs rounded-xl">
@@ -21,9 +24,10 @@
 
         <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por nome do livro" class="input input-bordered w-full max-w-xs rounded-xl" />
 
-        <button wire:click="exportar" class="btn btn-success gap-2">
+        <button wire:click="exportar" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded transition">
             Exportar livros
         </button>
+
     </div>
 
 

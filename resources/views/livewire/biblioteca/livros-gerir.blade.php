@@ -4,7 +4,7 @@
             <h2 class="text-xl font-semibold text-gray-800 leading-tight">
                 {{ __('Gestão de Livros') }}
             </h2>
-            <a href="{{ route('livros.criar') }}" class="btn btn-primary text-sm">
+            <a href="{{ route('livros.criar') }}" class="btn btn-outline">
                 Criar Novo Livro
             </a>
         </div>
@@ -29,7 +29,7 @@
         <div class="bg-base-100 shadow-md rounded-2xl px-6 py-8">
             <div class="flex flex-col sm:flex-row items-start gap-6">
                 <figure class="flex-shrink-0">
-                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                    <img src="{{ Str::startsWith($livro->imagem_capa, 'http') ? $livro->imagem_capa : Storage::url($livro->imagem_capa) }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
                 </figure>
 
                 <div class="flex-1 space-y-2 min-w-0 break-words">
@@ -61,8 +61,8 @@
                     </p>
 
                     <div class="flex gap-2 mt-4">
-                        <a href="{{ route('livros.editar', $livro->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                        <button wire:click="eliminarDireto({{ $livro->id }})" class="btn btn-sm btn-error">Eliminar</button>
+                        <a href="{{ route('livros.editar', $livro->id) }}" class="btn btn-warning">Editar</a>
+                        <button wire:click="eliminarDireto({{ $livro->id }})" class="px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-md transition">Eliminar</button>
                     </div>
                 </div>
             </div>

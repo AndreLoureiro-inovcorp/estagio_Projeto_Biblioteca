@@ -19,7 +19,7 @@
     <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
         <div class="flex flex-col sm:flex-row items-start gap-6">
             <figure class="flex-shrink-0">
-                <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                <img src="{{ Str::startsWith($livro->imagem_capa, 'http') ? $livro->imagem_capa : Storage::url($livro->imagem_capa) }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
             </figure>
 
             <div class="space-y-2 min-w-0 break-words">
@@ -49,15 +49,17 @@
                     @endif
                 </p>
 
-                <div class="card-actions justify-end ">
-                    <a href="{{ route('livros.historico', $livro->id) }}" class="btn btn-sm btn-info">Histórico</a>
+                <div class="max-w-4xl mx-auto mt-6 px-4 flex justify-end gap-3">
+                    <a href="{{ route('livros.historico', $livro->id) }}" class="bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm px-4 py-2 rounded transition">
+                        Histórico
+                    </a>
+
+                    @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
                 </div>
             </div>
         </div>
     </div>
     <div class="max-w-4xl mx-auto mt-6 px-4">
-        @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
-
         <a href="{{ route('livros.index') }}" class="btn btn-outline btn-sm rounded-full">
             ← Voltar
         </a>

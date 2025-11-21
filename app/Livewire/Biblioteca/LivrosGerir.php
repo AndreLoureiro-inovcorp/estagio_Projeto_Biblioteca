@@ -29,7 +29,7 @@ class LivrosGerir extends Component
 
     public function render()
     {
-        $livros = Livro::with(['autores', 'editora'])->latest()->paginate(10);
+        $livros = Livro::with(['autores', 'editora'])->latest()->paginate(6);
 
         return view('livewire.biblioteca.livros-gerir', [
             'livros' => $livros,

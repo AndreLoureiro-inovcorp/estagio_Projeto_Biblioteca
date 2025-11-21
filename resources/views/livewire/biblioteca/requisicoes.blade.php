@@ -18,9 +18,9 @@
     <div class="bg-base-100 shadow-xl rounded-xl p-6">
         <div class="overflow-x-auto">
             <table class="table table-zebra w-full">
-                <thead>
+                <thead class="text-base font-semibold text-neutral">
                     <tr>
-                        <th>Nº</th>
+                        <th>Nº Requisição</th>
                         @if($isAdmin)
                         <th>Utilizador</th>
                         @endif
@@ -30,7 +30,7 @@
                         <th>Entrega Real</th>
                         <th>Estado</th>
                         @if($isAdmin)
-                        <th>Ações</th>
+                        <th>Confirmar devoluções</th>
                         @endif
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@
                     @forelse($requisicoes as $requisicao)
                     <tr>
                         <td>
-                            <span class="font-mono font-semibold">
+                            <span>
                                 {{ $requisicao->numero_requisicao }}
                             </span>
                         </td>
@@ -48,7 +48,7 @@
                         @endif
 
                         <td>
-                            <div class="font-semibold">{{ $requisicao->livro->nome }}</div>
+                            <div>{{ $requisicao->livro->nome }}</div>
                         </td>
 
                         <td>{{ $requisicao->data_requisicao->format('d/m/Y') }}</td>
@@ -69,11 +69,15 @@
                             @endif
                         </td>
 
-                        @if($isAdmin && $requisicao->estado === 'ativa')
+                        @if($isAdmin)
                         <td>
+                            @if($requisicao->estado === 'ativa')
                             <a href="{{ route('requisicoes.confirmar-devolucao', $requisicao->id) }}" class="btn btn-sm btn-success">
                                 Confirmar Devolução
                             </a>
+                            @else
+                            <span class="text-gray-400 italic">—</span>
+                            @endif
                         </td>
                         @endif
                     </tr>
