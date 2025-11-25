@@ -14,12 +14,11 @@ use App\Livewire\Biblioteca\RequisicaoConfirmarDevolucao;
 use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\Requisicoes;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\PesquisarLivrosApi;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Rotas Autenticadas - Todos os Utilizadores
 
 Route::middleware(['auth'])->group(function () {
 
@@ -29,8 +28,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/livros/{livro}', LivroShow::class)->name('livros.show');
 });
-
-// Rotas de Administração - Apenas Admin
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -45,6 +42,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // Confirmar Devolução de Requisições
     Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
+
+    // Pesquisa de livros na API
+    Route::get('/admin/pesquisar-livros-api', PesquisarLivrosApi::class)->name('admin.pesquisar-livros-api');
 });
 
 // Rotas de Requisições - Todos Autenticados + Verificados
