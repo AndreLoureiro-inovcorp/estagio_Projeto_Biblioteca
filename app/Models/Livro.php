@@ -11,18 +11,16 @@ class Livro extends Model
     use HasFactory;
 
     protected $fillable = [
-
-        'nome', 
-        'isbn', 
-        'editora_id', 
-        'imagem_capa', 
-        'bibliografia', 
-        'preco',
+        'isbn',
+        'nome',
+        'editora_id',
+        'bibliografia',
+        'imagem_capa',
         'disponivel',
+        'preco'
     ];
 
     protected $casts = [
-        'isbn' => 'encrypted',
         'disponivel' => 'boolean',
     ];
 

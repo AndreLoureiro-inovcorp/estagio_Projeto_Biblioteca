@@ -14,6 +14,18 @@
             </div>
             @endif
 
+            @if (session()->has('success'))
+            <div class="alert alert-success mb-6">
+                <span>{{ session('success') }}</span>
+            </div>
+            @endif
+
+            @if (session()->has('error'))
+            <div class="alert alert-error mb-6">
+                <span>{{ session('error') }}</span>
+            </div>
+            @endif
+
             <div class="card bg-base-100 shadow-xl mb-8">
                 <div class="card-body">
                     <form wire:submit.prevent="pesquisar" class="flex gap-3">
@@ -77,6 +89,20 @@
                         <p class="text-sm text-base-content opacity-70">
                             {{ Str::limit($livro['bibliografia'], 100) }}
                         </p>
+                        @endif
+
+                        @php
+                        $jaImportado = \App\Models\Livro::where('isbn', $livro['isbn'])->exists();
+                        @endphp
+
+                        @if($jaImportado)
+                        <button disabled class="bg-gray-400 text-white font-semibold px-4 py-2 rounded-lg text-sm cursor-not-allowed">
+                            Já importado
+                        </button>
+                        @else
+                        <button wire:click="importarLivro({{ $loop->index }})" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition">
+                            Importar
+                        </button>
                         @endif
                     </div>
                 </div>
