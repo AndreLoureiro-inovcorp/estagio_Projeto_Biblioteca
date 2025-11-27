@@ -29,7 +29,7 @@
             <div class="card bg-base-100 shadow-xl mb-8">
                 <div class="card-body">
                     <form wire:submit.prevent="pesquisar" class="flex gap-3">
-                        <input type="text" wire:model="termoPesquisa" placeholder="Digite o nome do livro ou do autor" class="input input-bordered flex-1">
+                        <input type="text" wire:model="termoPesquisa" placeholder="Descreve o titulo de um livro ou autor" class="input input-bordered flex-1">
 
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50" wire:loading.attr="disabled">
                             <span wire:loading.remove>Pesquisar</span>

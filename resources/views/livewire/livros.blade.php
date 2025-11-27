@@ -36,8 +36,8 @@
             @foreach ($livros as $livro)
             <div class="card bg-base-100 w-80 shadow-md rounded-2xl px-4">
 
-                <figure>
-                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-full object-cover mt-4 rounded-2xl" />
+                <figure class="px-4 pt-4">
+                    <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="rounded-xl h-48 object-contain" />
                 </figure>
 
                 <div class="card-body space-y-2">
