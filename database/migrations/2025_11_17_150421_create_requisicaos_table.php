@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('numero_requisicao')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('livro_id')->constrained()->onDelete('restrict');
+            $table->foreignId('livro_id')->constrained()->onDelete('cascade');
             $table->date('data_requisicao');
             $table->date('data_prevista_entrega');
             $table->date('data_entrega_real')->nullable();

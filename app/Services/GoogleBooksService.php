@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class GoogleBooksService
 {
@@ -12,33 +11,29 @@ class GoogleBooksService
     public function pesquisarLivros($termoPesquisa, $numeroMaximoResultados = 10)
     {
 
-        try {
-            $respostaApi = Http::get(self::API_URL, [
-                'q' => $termoPesquisa,
-                'maxResults' => $numeroMaximoResultados,
-            ]);
+        $respostaApi = Http::get(self::API_URL, [
+            'q' => $termoPesquisa,
+            'maxResults' => $numeroMaximoResultados,
+        ]);
 
-            if ($respostaApi->successful()) {
-                $dadosRecebidos = $respostaApi->json();
+        if ($respostaApi->successful()) {
+            $dadosRecebidos = $respostaApi->json();
 
-                return $dadosRecebidos['items'] ?? [];
+            return $dadosRecebidos['items'] ?? [];
 
-            }
-
-            return [];
-
-        } catch (\Exception $erro) {
-            Log::error('Erro ao carregar livros da API do Google Books: '.$erro->getMessage());
-
-            return [];
         }
+
+        return [];
+
     }
 
     public function formatarDadosLivro($dadosLivroApi)
     {
         $informacoesLivro = $dadosLivroApi['volumeInfo'] ?? [];
 
-        // Procurar ISBN-13 (maioria dos livros tem)
+        $informacoesVenda = $dadosLivroApi['saleInfo'] ?? [];
+        $informacoesPreco = $informacoesVenda['listPrice'] ?? [];
+
         $isbn = null;
         $identificadores = $informacoesLivro['industryIdentifiers'] ?? [];
 
@@ -57,6 +52,7 @@ class GoogleBooksService
             'bibliografia' => $informacoesLivro['description'] ?? null,
             'imagem_capa' => $informacoesLivro['imageLinks']['thumbnail'] ?? null,
             'disponivel' => true,
+            'preco' => $informacoesPreco['amount'] ?? null,
         ];
     }
 

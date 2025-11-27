@@ -33,7 +33,7 @@ class PesquisarLivrosApi extends Component
         $this->carregando = true;
 
         $servico = new GoogleBooksService;
-        $livrosDaApi = $servico->pesquisarLivros($this->termoPesquisa, 20);
+        $livrosDaApi = $servico->pesquisarLivros($this->termoPesquisa);
 
         $this->resultados = collect($livrosDaApi)
             ->map(function ($livro) use ($servico) {

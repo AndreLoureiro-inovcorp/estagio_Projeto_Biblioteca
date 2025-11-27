@@ -85,6 +85,15 @@
                             {{ $livro['isbn'] }}
                         </p>
 
+                        <p class="text-sm">
+                            <strong>Preço:</strong>
+                            @if($livro['preco'] > 0)
+                            €{{ number_format($livro['preco'], 2, ',', '.') }}
+                            @else
+                            <span class="text-gray-500">Sem preço</span>
+                            @endif
+                        </p>
+                        
                         @if($livro['bibliografia'])
                         <p class="text-sm text-base-content opacity-70">
                             {{ Str::limit($livro['bibliografia'], 100) }}
