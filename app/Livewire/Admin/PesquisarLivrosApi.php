@@ -52,30 +52,20 @@ class PesquisarLivrosApi extends Component
     {
         $dadosLivro = $this->resultados[$index];
 
-        // Se já existe, parar
-        if (Livro::where('isbn', $dadosLivro['isbn'])->exists()) {
-            session()->flash('error', 'Este livro já foi importado!');
-
-            return;
-        }
-
         try {
 
-            // 1. Criar/editora se existir nome
             $editoraId = null;
             if (! empty($dadosLivro['editora_nome'])) {
                 $editora = Editora::firstOrCreate(['nome' => $dadosLivro['editora_nome']]);
                 $editoraId = $editora->id;
             }
 
-            // 2. Criar autores
             $autoresIds = [];
             foreach ($dadosLivro['autores_nomes'] as $nomeAutor) {
                 $autor = Autor::firstOrCreate(['nome' => $nomeAutor]);
                 $autoresIds[] = $autor->id;
             }
 
-            // 3. Criar o livro
             $livro = Livro::create([
                 'isbn' => $dadosLivro['isbn'],
                 'nome' => $dadosLivro['nome'],
@@ -86,7 +76,6 @@ class PesquisarLivrosApi extends Component
                 'preco' => $dadosLivro['preco'],
             ]);
 
-            // 4. Associar autores
             if (! empty($autoresIds)) {
                 $livro->autores()->attach($autoresIds);
             }

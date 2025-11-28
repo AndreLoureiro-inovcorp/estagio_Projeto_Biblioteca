@@ -8,12 +8,12 @@ class GoogleBooksService
 {
     private const API_URL = 'https://www.googleapis.com/books/v1/volumes';
 
-    public function pesquisarLivros($termoPesquisa, $numeroMaximoResultados = 10)
+    public function pesquisarLivros($termoPesquisa)
     {
 
         $respostaApi = Http::get(self::API_URL, [
             'q' => $termoPesquisa,
-            'maxResults' => $numeroMaximoResultados,
+            'key' => config('services.google_books.api_key'),
         ]);
 
         if ($respostaApi->successful()) {
