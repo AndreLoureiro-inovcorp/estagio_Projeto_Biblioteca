@@ -30,6 +30,6 @@ class Requisicoes extends Component
 
         $requisicoes = $query->get();
 
-        return view('livewire.biblioteca.requisicoes', compact('requisicoes', 'isAdmin', 'isCidadao'));
+        return view('livewire.biblioteca.requisicoes.requisicoes', compact('requisicoes', 'isAdmin', 'isCidadao'));
     }
 }

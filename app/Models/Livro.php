@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Livro extends Model
 {
     use HasFactory;
@@ -17,7 +16,7 @@ class Livro extends Model
         'bibliografia',
         'imagem_capa',
         'disponivel',
-        'preco'
+        'preco',
     ];
 
     protected $casts = [
@@ -43,6 +42,7 @@ class Livro extends Model
     {
         return $this->hasMany(Requisicao::class)->orderBy('created_at', 'desc');
     }
+
     public function scopeDisponiveis($query)
     {
         return $query->where('disponivel', true);
@@ -51,5 +51,20 @@ class Livro extends Model
     public function scopeIndisponiveis($query)
     {
         return $query->where('disponivel', false);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function reviewsAtivos()
+    {
+        return $this->hasMany(Review::class)->where('estado', 'ativo');
+    }
+
+    public function mediaClassificacao()
+    {
+        return $this->reviews()->where('estado', 'ativo')->avg('classificacao');
     }
 }

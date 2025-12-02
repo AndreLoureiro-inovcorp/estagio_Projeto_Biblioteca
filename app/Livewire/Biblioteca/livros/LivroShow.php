@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\livros;
 
 use App\Models\Livro;
 use Livewire\Attributes\Layout;
@@ -19,7 +19,7 @@ class LivroShow extends Component
 
     public function render()
     {
-        return view('livewire.livro-show');
+        return view('livewire.biblioteca.livros.livro-show');
     }
 }
 

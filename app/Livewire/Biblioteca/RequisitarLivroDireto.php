@@ -43,6 +43,6 @@ class RequisitarLivroDireto extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.requisitar-livro-direto');
+        return view('livewire.biblioteca.requisicoes.requisitar-livro-direto');
     }
 }

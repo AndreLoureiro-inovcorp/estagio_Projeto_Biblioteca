@@ -1,20 +1,26 @@
 <?php
 
-use App\Livewire\Admin\GerirUtilizadores;
-use App\Livewire\Admin\UtilizadorHistorico;
-use App\Livewire\Biblioteca\Autores;
-use App\Livewire\Biblioteca\Editoras;
-use App\Livewire\Biblioteca\LivroCriar;
-use App\Livewire\Biblioteca\LivroEditar;
+use Illuminate\Support\Facades\Route;
+
+use App\Livewire\Biblioteca\livros\Autores;
+use App\Livewire\Biblioteca\livros\Editoras;
+use App\Livewire\Biblioteca\livros\Livros;
 use App\Livewire\Biblioteca\LivroHistorico;
-use App\Livewire\Biblioteca\Livros;
-use App\Livewire\Biblioteca\LivrosGerir;
-use App\Livewire\Biblioteca\LivroShow;
-use App\Livewire\Biblioteca\RequisicaoConfirmarDevolucao;
+use App\Livewire\Biblioteca\livros\LivroShow;
+
+use App\Livewire\Biblioteca\admin\LivroCriar;
+use App\Livewire\Biblioteca\admin\LivroEditar;
+use App\Livewire\Biblioteca\admin\LivrosGerir;
+use App\Livewire\Biblioteca\admin\RequisicaoConfirmarDevolucao;
+use App\Livewire\Biblioteca\admin\GerirUtilizadores;
+use App\Livewire\Biblioteca\admin\UtilizadorHistorico;
+use App\Livewire\Biblioteca\admin\PesquisarLivrosApi;
+
 use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\Requisicoes;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Admin\PesquisarLivrosApi;
+
+use App\Livewire\Biblioteca\Reviews\CriarReview;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,43 +28,34 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/livros', Livros::class)->name('livros.index');
+    Route::get('/biblioteca/livros', Livros::class)->name('livros.index');
     Route::get('/autores', Autores::class)->name('autores.index');
     Route::get('/editoras', Editoras::class)->name('editoras.index');
 
-    Route::get('/livros/{livro}', LivroShow::class)->name('livros.show');
+    Route::get('/biblioteca/livros/{livro}', LivroShow::class)->name('livros.show');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    // Gestão de Utilizadores
     Route::get('/admin/utilizadores', GerirUtilizadores::class)->name('admin.utilizadores');
     Route::get('/admin/utilizadores/{utilizador}/historico', UtilizadorHistorico::class)->name('admin.utilizador.historico');
 
-    // Gestão de Livros (CRUD)
     Route::get('/admin/livros', LivrosGerir::class)->name('admin.livros');
     Route::get('/admin/livros/criar', LivroCriar::class)->name('livros.criar');
     Route::get('/admin/livros/{livro}/editar', LivroEditar::class)->name('livros.editar');
 
-    // Confirmar Devolução de Requisições
     Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
-
-    // Pesquisa de livros na API
     Route::get('/admin/pesquisar-livros-api', PesquisarLivrosApi::class)->name('admin.pesquisar-livros-api');
 });
 
-// Rotas de Requisições - Todos Autenticados + Verificados
-
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // Ver requisições - página principal
     Route::get('/requisicoes', Requisicoes::class)->name('requisicoes.index');
-
-    // Criar nova requisição
     Route::get('/requisicoes/criar', RequisicaoCriar::class)->name('requisicao.criar');
 
-    // Histórico de um livro específico
     Route::get('/livros/{livro}/historico', LivroHistorico::class)->name('livros.historico');
+
+    Route::get('/reviews/criar/{requisicao}', CriarReview::class)->name('reviews.criar');
 });
 
 Route::middleware([

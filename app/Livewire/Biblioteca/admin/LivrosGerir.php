@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\admin;
 
 use Livewire\Component;
 use App\Models\Livro;
@@ -31,7 +31,7 @@ class LivrosGerir extends Component
     {
         $livros = Livro::with(['autores', 'editora'])->latest()->paginate(6);
 
-        return view('livewire.biblioteca.livros-gerir', [
+        return view('livewire.biblioteca.admin.livros-gerir', [
             'livros' => $livros,
         ]);
     }

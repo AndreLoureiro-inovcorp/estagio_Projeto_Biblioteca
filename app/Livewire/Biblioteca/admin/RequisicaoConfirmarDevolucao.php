@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\Requisicao;
 use Livewire\Component;
@@ -62,6 +62,6 @@ class RequisicaoConfirmarDevolucao extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.requisicao-confirmar-devolucao');
+        return view('livewire.biblioteca.admin.requisicao-confirmar-devolucao');
     }
 }

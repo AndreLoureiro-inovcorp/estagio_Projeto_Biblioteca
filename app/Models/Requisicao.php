@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Requisicao extends Model
@@ -41,6 +41,11 @@ class Requisicao extends Model
     public function livro()
     {
         return $this->belongsTo(Livro::class);
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
     }
 
     public function scopeAtivas($query)

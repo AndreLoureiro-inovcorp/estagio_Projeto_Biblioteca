@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\Autor;
 use App\Models\Editora;
@@ -89,6 +89,6 @@ class PesquisarLivrosApi extends Component
 
     public function render()
     {
-        return view('livewire.admin.pesquisar-livros-api');
+        return view('livewire.biblioteca.admin.pesquisar-livros-api');
     }
 }

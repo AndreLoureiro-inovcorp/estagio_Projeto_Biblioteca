@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\livros;
 
-use App\Models\Autor;
+use App\Models\Editora;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.app')]
-class Autores extends Component
+class Editoras extends Component
 {
     public $pesquisa = '';
     public $ordenarPorNome = '';
 
     public function render()
     {
-        $query = Autor::query();
+        $query = Editora::query();
 
         if ($this->pesquisa) {
             $query->where('nome', 'like', '%' . $this->pesquisa . '%');
@@ -26,8 +26,8 @@ class Autores extends Component
             $query->orderBy('nome', 'desc');
         }
 
-        return view('livewire.autores', [
-            'autores' => $query->with('livros')->get()
+        return view('livewire.biblioteca.livros.editoras', [
+            'editoras' => $query->with('livros')->get()
         ]);
     }
 }

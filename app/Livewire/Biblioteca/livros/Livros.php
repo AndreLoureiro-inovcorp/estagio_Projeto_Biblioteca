@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\livros;
 
 use App\Models\Livro;
 use App\Models\Autor;
@@ -54,7 +54,7 @@ class Livros extends Component
 
         $livros = $query->get();
 
-        return view('livewire.livros', [
+        return view('livewire.biblioteca.livros.livros', [
             'livros' => $livros,
         ]);
     }

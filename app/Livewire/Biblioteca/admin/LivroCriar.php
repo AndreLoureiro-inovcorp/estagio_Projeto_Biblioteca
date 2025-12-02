@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\admin;
 
 use Livewire\Component;
 use App\Models\Livro;
@@ -86,6 +86,6 @@ class LivroCriar extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.livro-criar');
+        return view('livewire.biblioteca.admin.livro-criar');
     }
 }

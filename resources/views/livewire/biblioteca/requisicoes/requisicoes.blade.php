@@ -11,7 +11,7 @@
 
     @role('admin')
     <div class="mb-6">
-        <livewire:biblioteca.indicadores-requisicoes />
+        <livewire:biblioteca.admin.indicadores-requisicoes />
     </div>
     @endrole
 
@@ -32,6 +32,7 @@
                         @if($isAdmin)
                         <th>Confirmar devoluções</th>
                         @endif
+                        <th>Review</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,9 +64,9 @@
 
                         <td>
                             @if($requisicao->estado === 'entregue')
-                            <span class="badge badge-success">Entregue</span>
+                            <span class="badge badge-success whitespace-nowrap">Entregue</span>
                             @else
-                            <span class="badge badge-info">Por Devolver</span>
+                            <span class="badge badge-info whitespace-nowrap">Por Devolver</span>
                             @endif
                         </td>
 
@@ -80,6 +81,19 @@
                             @endif
                         </td>
                         @endif
+
+                        <td class="text-center">
+                            @if($requisicao->estado === 'entregue' && !$requisicao->review && $requisicao->user_id === auth()->id())
+                            <a href="{{ route('reviews.criar', $requisicao->id) }}" class="btn btn-sm btn-success">
+                                Dá-nos a tua opinião
+                            </a>
+                            @elseif($requisicao->review)
+                            <span class="btn btn-sm btn-success">Avaliado</span>
+                            @else
+                            <span class="text-gray-400 italic">—</span>
+                            @endif
+                        </td>
+
                     </tr>
                     @empty
                     <tr>

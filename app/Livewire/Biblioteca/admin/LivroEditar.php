@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\admin;
 
 use Livewire\Component;
 use App\Models\Livro;
@@ -84,6 +84,6 @@ class LivroEditar extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.livro-editar');
+        return view('livewire.biblioteca.admin.livro-editar');
     }
 }

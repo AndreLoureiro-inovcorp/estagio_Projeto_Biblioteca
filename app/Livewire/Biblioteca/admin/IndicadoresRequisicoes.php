@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\Requisicao;
 use Carbon\Carbon;
@@ -24,7 +24,7 @@ class IndicadoresRequisicoes extends Component
             ->where('estado', 'entregue')
             ->count();
 
-        return view('livewire.Biblioteca.indicadores-requisicoes', [
+        return view('livewire.Biblioteca.admin.indicadores-requisicoes', [
             'requisicoesAtivas' => $requisicoesAtivas,
             'requisicoesUltimos30Dias' => $requisicoesUltimos30Dias,
             'livrosEntreguesHoje' => $livrosEntreguesHoje,

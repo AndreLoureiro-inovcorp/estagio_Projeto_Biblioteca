@@ -14,11 +14,12 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens;
-    use HasRoles;
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasProfilePhoto;
+
+    use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
@@ -75,6 +76,11 @@ class User extends Authenticatable
     public function requisicoesAtivas()
     {
         return $this->hasMany(Requisicao::class)->where('estado', 'ativa');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
     public function podeRequisitar()

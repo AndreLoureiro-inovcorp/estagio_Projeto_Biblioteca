@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\Requisicao;
 use App\Models\User;
@@ -25,6 +25,6 @@ class UtilizadorHistorico extends Component
 
     public function render()
     {
-        return view('livewire.admin.utilizador-historico');
+        return view('livewire.biblioteca.admin.utilizador-historico');
     }
 }

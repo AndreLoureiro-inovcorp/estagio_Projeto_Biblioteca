@@ -22,6 +22,6 @@ class LivroHistorico extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.livro-historico');
+        return view('livewire.biblioteca.livros.livro-historico');
     }
 }

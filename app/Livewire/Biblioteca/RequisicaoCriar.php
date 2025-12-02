@@ -110,7 +110,7 @@ class RequisicaoCriar extends Component
             ->orderBy('nome')
             ->get();
 
-        return view('livewire.biblioteca.requisicao-criar', [
+        return view('livewire.biblioteca.requisicoes.requisicao-criar', [
             'livrosDisponiveis' => $livrosDisponiveis,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\User;
 use Livewire\Component;
@@ -44,6 +44,6 @@ class GerirUtilizadores extends Component
 
     public function render()
     {
-        return view('livewire.admin.gerir-utilizadores');
+        return view('livewire.biblioteca.admin.gerir-utilizadores');
     }
 }
