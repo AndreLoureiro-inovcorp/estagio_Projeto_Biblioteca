@@ -64,4 +64,55 @@
             ← Voltar
         </a>
     </div>
+
+    <div class="max-w-4xl mx-auto mt-14 px-4">
+
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            Reviews deste livro:
+        </h3>
+
+        @php
+        $reviewsAtivos = $livro->reviews()->ativo()->latest()->get();
+        @endphp
+
+        @if($reviewsAtivos->isEmpty())
+        <div class="">
+            Ainda sem Reviews!
+        </div>
+        @else
+
+        <div class="space-y-6">
+            @foreach($reviewsAtivos as $review)
+
+            <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+
+                <div class="flex items-start justify-between">
+
+                    <div>
+                        <p class="font-semibold text-gray-800">
+                            {{ $review->user->name }}
+                        </p>
+
+                        <p class="text-xs text-gray-400 mt-0.5">
+                            {{ $review->created_at->format('d M Y') }}
+                        </p>
+                    </div>
+
+                    <div class="text-right">
+                        <div class="flex text-yellow-400 text-lg justify-end">
+                            {!! $review->estrelasHtml() !!}
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-gray-700 leading-relaxed text-sm">
+                    {{ $review->comentario }}
+                </p>
+
+            </div>
+            @endforeach
+        </div>
+        @endif
+    </div>
+
 </div>

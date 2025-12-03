@@ -20,6 +20,8 @@ use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\Requisicoes;
 
 use App\Livewire\Biblioteca\Reviews\CriarReview;
+use App\Livewire\Biblioteca\admin\GerirReviews;
+use App\Livewire\Biblioteca\admin\RecusarReview;
 
 
 Route::get('/', function () {
@@ -46,6 +48,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/requisicoes/{requisicao}/confirmar-devolucao', RequisicaoConfirmarDevolucao::class)->name('requisicoes.confirmar-devolucao');
     Route::get('/admin/pesquisar-livros-api', PesquisarLivrosApi::class)->name('admin.pesquisar-livros-api');
+
+    Route::get('/admin/reviews', GerirReviews::class)->name('admin.reviews');
+    Route::get('/admin/reviews/{review}/recusar', RecusarReview::class)->name('admin.reviews.recusar');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

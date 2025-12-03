@@ -6,6 +6,8 @@ use App\Models\Requisicao;
 use App\Models\Review;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Mail\NovaReviewAdmin;
+use Illuminate\Support\Facades\Mail;
 
 #[Layout('layouts.app')]
 class CriarReview extends Component
@@ -46,13 +48,15 @@ class CriarReview extends Component
     {
         $this->validate();
 
-        Review::create([
+        $review = Review::create([
             'requisicao_id' => $this->requisicao->id,
             'livro_id' => $this->requisicao->livro_id,
             'user_id' => auth()->id(),
             'classificacao' => $this->classificacao,
             'comentario' => $this->comentario,
         ]);
+
+        Mail::to('admin@biblioteca.pt')->send(new NovaReviewAdmin($review));
 
         session()->flash('success', 'Obrigado pela tua review!');
 
