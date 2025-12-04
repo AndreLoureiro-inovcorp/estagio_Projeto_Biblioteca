@@ -11,19 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('alertas_livro', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId('requisicao_id')->constrained('requisicaos')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('livro_id')->constrained('livros')->onDelete('cascade');
-            $table->tinyInteger('classificacao')->unsigned();
-            $table->text('comentario');
-            $table->enum('estado', ['suspenso', 'ativo', 'recusado'])->default('suspenso');
-            $table->text('justificacao_recusada')->nullable();
+            $table->boolean('notificado')->default(false);
             $table->timestamps();
-            $table->index('estado');
-            $table->unique(['requisicao_id']);
+            $table->unique(['user_id', 'livro_id']);
+            $table->index('notificado');
+            $table->index('livro_id');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('alertas_livro');
     }
 };

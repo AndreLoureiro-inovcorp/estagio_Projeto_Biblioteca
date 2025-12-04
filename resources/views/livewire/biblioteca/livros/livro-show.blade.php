@@ -4,17 +4,24 @@
             {{ __('Livro: ') }}{{ $livro->nome }}
         </h2>
     </x-slot>
+
     @if(session('sucesso'))
-    <div class="alert alert-success shadow-lg mb-4 mt-4">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>{{ session('sucesso') }}</span>
-        </div>
+    <div class="max-w-4xl mx-auto mt-16 alert alert-success">
+        <span>{{ session('sucesso') }}</span>
     </div>
     @endif
 
+    @if(session('success'))
+    <div class="mb-4 text-sm text-green-600 bg-green-50 border border-green-200 px-4 py-2 rounded-md">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if(session('info'))
+    <div class="mb-4 text-sm text-blue-600 bg-blue-50 border border-blue-200 px-4 py-2 rounded-md">
+        {{ session('info') }}
+    </div>
+    @endif
 
     <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
         <div class="flex flex-col sm:flex-row items-start gap-6">
@@ -53,6 +60,8 @@
                     <a href="{{ route('livros.historico', $livro->id) }}" class="bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm px-4 py-2 rounded transition">
                         Histórico
                     </a>
+
+                    @livewire('biblioteca.livros.solicitar-alerta', ['livroId' => $livro->id])
 
                     @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
                 </div>
@@ -149,7 +158,4 @@
         </div>
     </div>
     @endif
-
-
-
 </div>
