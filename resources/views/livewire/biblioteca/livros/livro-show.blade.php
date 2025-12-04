@@ -19,7 +19,7 @@
     <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
         <div class="flex flex-col sm:flex-row items-start gap-6">
             <figure class="flex-shrink-0">
-                <img src="{{ Str::startsWith($livro->imagem_capa, 'http') ? $livro->imagem_capa : Storage::url($livro->imagem_capa) }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                <img src="{{ Str::startsWith($livro->imagem_capa, 'http') ? $livro->imagem_capa : Storage::url($livro->imagem_capa) }}" alt="{{ $livro->nome }}" class="w-48 h-64 rounded-xl object-contain" />
             </figure>
 
             <div class="space-y-2 min-w-0 break-words">
@@ -114,5 +114,42 @@
         </div>
         @endif
     </div>
+
+    @if($livrosRelacionados->isNotEmpty())
+    <div class="flex justify-center mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            @foreach ($livrosRelacionados as $livroRelacionado)
+            <a href="{{ route('livros.show', $livroRelacionado->id) }}" class="card bg-base-100 w-64 shadow-md rounded-2xl px-4 hover:shadow-xl transition">
+
+                <figure class="px-4 pt-4">
+                    <img src="{{ Str::startsWith($livroRelacionado->imagem_capa, 'http') ? $livroRelacionado->imagem_capa : Storage::url($livroRelacionado->imagem_capa) }}" alt="{{ $livroRelacionado->nome }}" class="rounded-xl h-48 object-contain" />
+                </figure>
+
+                <div class="card-body items-center text-center space-y-2">
+
+                    <h2 class="card-title text-lg font-semibold">
+                        {{ $livroRelacionado->nome }}
+                    </h2>
+
+                    <p class="text-sm">
+                        <strong>Autores:</strong>
+                        {{ $livroRelacionado->autores->pluck('nome')->join(', ') }}
+                    </p>
+
+                    <p class="text-sm">
+                        <strong>Preço:</strong>
+                        €{{ number_format($livroRelacionado->preco, 2, ',', '.') }}
+                    </p>
+
+                </div>
+            </a>
+            @endforeach
+
+        </div>
+    </div>
+    @endif
+
+
 
 </div>

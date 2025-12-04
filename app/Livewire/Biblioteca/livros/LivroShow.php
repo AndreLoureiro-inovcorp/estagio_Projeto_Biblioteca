@@ -19,7 +19,10 @@ class LivroShow extends Component
 
     public function render()
     {
-        return view('livewire.biblioteca.livros.livro-show');
+        $livrosRelacionados = $this->livro->livrosRelacionados(3);
+
+        return view('livewire.biblioteca.livros.livro-show', [
+            'livrosRelacionados' => $livrosRelacionados,
+        ]);
     }
 }
-

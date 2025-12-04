@@ -23,29 +23,6 @@ class Livro extends Model
         'disponivel' => 'boolean',
     ];
 
-    private static $stopwords = [
-        'a', 'o', 'as', 'os', 'de', 'do', 'da', 'dos', 'das',
-        'em', 'no', 'na', 'nos', 'nas',
-        'e', 'ou', 'mas', 'que', 'se', 'como', 'para', 'por', 'com',
-        'the', 'a', 'an', 'and', 'or', 'but', 'of', 'in', 'on',
-        'to', 'for', 'with', 'by', 'from', 'is', 'are', 'was', 'were',
-    ];
-
-    private function limparTexto(string $texto): array
-    {
-        $texto = mb_strtolower($texto, 'UTF-8');
-
-        $texto = preg_replace('/[^a-záàâãéèêíïóôõöúçñ\s]/u', ' ', $texto);
-
-        $palavras = preg_split('/\s+/', $texto, -1, PREG_SPLIT_NO_EMPTY);
-
-        $palavrasLimpas = array_filter($palavras, function ($palavra) {
-            return strlen($palavra) >= 3 && ! in_array($palavra, self::$stopwords);
-        });
-
-        return array_unique($palavrasLimpas);
-    }
-
     public function autores()
     {
         return $this->belongsToMany(Autor::class);
@@ -89,5 +66,71 @@ class Livro extends Model
     public function mediaClassificacao()
     {
         return $this->reviews()->where('estado', 'ativo')->avg('classificacao');
+    }
+
+    private static $stopwords = [
+        'a', 'o', 'as', 'os', 'de', 'do', 'da', 'dos', 'das',
+        'em', 'no', 'na', 'nos', 'nas',
+        'e', 'ou', 'mas', 'que', 'se', 'como', 'para', 'por', 'com',
+        'the', 'a', 'an', 'and', 'or', 'but', 'of', 'in', 'on',
+        'to', 'for', 'with', 'by', 'from', 'is', 'are', 'was', 'were',
+    ];
+
+    private function limparTexto(string $texto): array
+    {
+        $texto = mb_strtolower($texto, 'UTF-8');
+
+        $texto = preg_replace('/[^a-záàâãéèêíïóôõöúçñ\s]/u', ' ', $texto);
+
+        $palavras = preg_split('/\s+/', $texto, -1, PREG_SPLIT_NO_EMPTY);
+
+        $palavrasLimpas = array_filter($palavras, function ($palavra) {
+            return strlen($palavra) >= 3 && ! in_array($palavra, self::$stopwords);
+        });
+
+        return array_unique($palavrasLimpas);
+    }
+
+    public function livrosRelacionados(int $limite = 3)
+    {
+        if (empty($this->bibliografia)) {
+            return collect([]);
+        }
+
+        $palavrasAtual = $this->limparTexto($this->bibliografia);
+
+        if (empty($palavrasAtual)) {
+            return collect([]);
+        }
+
+        $outrosLivros = self::where('id', '!=', $this->id)->whereNotNull('bibliografia')->where('bibliografia', '!=', '')->with(['editora', 'autores'])->get();
+
+        $livrosComScore = $outrosLivros->map(function ($livro) use ($palavrasAtual) {
+
+            $palavrasLivro = $this->limparTexto($livro->bibliografia);
+
+            if (empty($palavrasLivro)) {
+                $livro->score = 0;
+
+                return $livro;
+            }
+
+            $palavrasEmComum = array_intersect($palavrasAtual, $palavrasLivro);
+            $numeroEmComum = count($palavrasEmComum);
+
+            $totalPalavras = count($palavrasAtual);
+            $livro->score = $totalPalavras > 0 ? $numeroEmComum / $totalPalavras : 0;
+
+            return $livro;
+        });
+
+        $livrosRelacionados = $livrosComScore
+            ->filter(function ($livro) {
+                return $livro->score > 0;
+            })
+            ->sortByDesc('score')
+            ->take($limite);
+
+        return $livrosRelacionados;
     }
 }
