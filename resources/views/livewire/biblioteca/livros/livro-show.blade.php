@@ -10,19 +10,7 @@
         <span>{{ session('sucesso') }}</span>
     </div>
     @endif
-
-    @if(session('success'))
-    <div class="mb-4 text-sm text-green-600 bg-green-50 border border-green-200 px-4 py-2 rounded-md">
-        {{ session('success') }}
-    </div>
-    @endif
-
-    @if(session('info'))
-    <div class="mb-4 text-sm text-blue-600 bg-blue-50 border border-blue-200 px-4 py-2 rounded-md">
-        {{ session('info') }}
-    </div>
-    @endif
-
+    
     <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
         <div class="flex flex-col sm:flex-row items-start gap-6">
             <figure class="flex-shrink-0">
@@ -57,13 +45,14 @@
                 </p>
 
                 <div class="max-w-4xl mx-auto mt-6 px-4 flex justify-end gap-3">
+                    @livewire('biblioteca.livros.solicitar-alerta', ['livroId' => $livro->id])
+
+                    @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
+
                     <a href="{{ route('livros.historico', $livro->id) }}" class="bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm px-4 py-2 rounded transition">
                         Histórico
                     </a>
 
-                    @livewire('biblioteca.livros.solicitar-alerta', ['livroId' => $livro->id])
-
-                    @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
                 </div>
             </div>
         </div>

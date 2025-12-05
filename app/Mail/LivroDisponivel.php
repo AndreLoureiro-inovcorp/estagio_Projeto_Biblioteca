@@ -2,25 +2,29 @@
 
 namespace App\Mail;
 
-use App\Models\Review;
+use App\Models\Livro;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReviewAprovada extends Mailable
+class LivroDisponivel extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $review;
+    public $livro;
+
+    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Review $review)
+    public function __construct(Livro $livro, User $user)
     {
-        $this->review = $review->load(['livro']);
+        $this->livro = $livro;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +33,7 @@ class ReviewAprovada extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Review Aprovada - '.$this->review->livro->nome,
+            subject: ' Livro Disponível - '.$this->livro->nome,
         );
     }
 
@@ -39,7 +43,7 @@ class ReviewAprovada extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.review-aprovada',
+            view: 'emails.livro-disponivel',
         );
     }
 

@@ -14,9 +14,9 @@
     <h2>Detalhes da Review:</h2>
 
     <p><strong>Livro:</strong> {{ $review->livro->nome }}</p>
-    
+
     <p><strong>Classificação:</strong> {{ $review->classificacao }}/5 ⭐</p>
-    
+
     <p><strong>Comentário:</strong></p>
     <blockquote>
         {{ $review->comentario }}
@@ -29,6 +29,8 @@
     <p><strong>Utilizador:</strong> {{ $review->user->name }} ({{ $review->user->email }})</p>
 
     <hr>
+
+    <p><a href="{{ route('admin.reviews') }}">Ver todas as reviews pendentes</a></p>
 
     <p>Obrigado por utilizares a nossa biblioteca!</p>
 </body>

@@ -36,13 +36,12 @@
                                         </p>
                                     </div>
 
-                                    {{-- ESTADO --}}
                                     @if ($review->estado === 'suspenso')
                                         <span class="badge badge-warning">
                                             Pendente
                                         </span>
                                     @elseif ($review->estado === 'recusado')
-                                        <span class="badge">
+                                        <span class="badge badge-error">
                                             Recusada
                                         </span>
                                     @endif

@@ -20,7 +20,7 @@ class NovaReviewAdmin extends Mailable
      */
     public function __construct(Review $review)
     {
-        $this->review = $review->load(['user', 'livro.editora', 'livro.autores']);
+        $this->review = $review->load(['user', 'livro']);
     }
 
     /**

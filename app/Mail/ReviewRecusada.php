@@ -20,7 +20,7 @@ class ReviewRecusada extends Mailable
      */
     public function __construct(Review $review)
     {
-        $this->review = $review->load(['livro.editora', 'livro.autores']);
+        $this->review = $review->load(['livro']);
     }
 
     /**

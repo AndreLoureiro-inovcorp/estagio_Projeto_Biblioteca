@@ -84,11 +84,11 @@
 
                         <td class="text-center">
                             @if($requisicao->estado === 'entregue' && !$requisicao->review && $requisicao->user_id === auth()->id())
-                            <a href="{{ route('reviews.criar', $requisicao->id) }}" class="btn btn-sm btn-success">
+                            <a href="{{ route('reviews.criar', $requisicao->id) }}" class="btn btn-sm btn-success ">
                                 Dá-nos a tua opinião
                             </a>
                             @elseif($requisicao->review)
-                            <span class="btn btn-sm btn-success">Avaliado</span>
+                            <span class="badge badge-success">Avaliado</span>
                             @else
                             <span class="text-gray-400 italic">—</span>
                             @endif

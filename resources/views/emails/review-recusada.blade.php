@@ -9,7 +9,7 @@
 
     <p>Olá {{ $review->user->name }},</p>
 
-    <p>Lamentamos informar que a tua review do livro <strong>{{ $review->livro->nome }}</strong> não foi aprovada pela nossa equipa de moderação.</p>
+    <p>Lamentamos informar que a tua review do livro <strong>{{ $review->livro->nome }}</strong> não foi aprovada.</p>
 
     <hr>
 
@@ -21,7 +21,7 @@
 
     <hr>
 
-    <p>Podes submeter uma nova review tendo em conta o feedback fornecido.</p>
+    <p>Podes submeter uma nova review com atenção ás normas do site.</p>
 
     <p>Agradecemos a tua compreensão!</p>
 

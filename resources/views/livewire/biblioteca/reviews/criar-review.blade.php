@@ -51,10 +51,6 @@
                 @error('comentario')
                     <span class="text-error text-sm">{{ $message }}</span>
                 @enderror
-
-                <p class="text-sm text-gray-500 mt-1 text-right">
-                    {{ strlen($comentario) }}/1000 caracteres
-                </p>
             </div>
 
             <div class="flex justify-between mt-6">
