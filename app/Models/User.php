@@ -14,11 +14,11 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
     use HasProfilePhoto;
-
     use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -91,5 +91,28 @@ class User extends Authenticatable
     public function numeroDeLivrosRequisitados()
     {
         return $this->requisicoesAtivas()->count();
+    }
+
+    public function carrinhoItens()
+    {
+        return $this->hasMany(CarrinhoItem::class);
+    }
+
+    public function encomendas()
+    {
+        return $this->hasMany(Encomenda::class);
+    }
+
+    public function totalItensCarrinho()
+    {
+        return $this->carrinhoItens()->sum('quantidade');
+    }
+
+    public function totalCarrinho()
+    {
+        return $this->carrinhoItens()
+            ->with('livro')
+            ->get()
+            ->sum(fn ($item) => $item->quantidade * $item->livro->preco);
     }
 }

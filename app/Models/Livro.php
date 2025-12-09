@@ -133,4 +133,24 @@ class Livro extends Model
 
         return $livrosRelacionados;
     }
+
+    public function carrinhoItens()
+    {
+        return $this->hasMany(CarrinhoItem::class);
+    }
+
+    public function encomendaItens()
+    {
+        return $this->hasMany(EncomendaItem::class);
+    }
+
+    public function podeSerComprado()
+    {
+        return $this->disponivel_compra == true;
+    }
+
+    public function scopeDisponivelCompra($query)
+    {
+        return $query->where('disponivel_compra', true);
+    }
 }

@@ -4,6 +4,7 @@
             <h2 class="text-xl font-semibold text-gray-800 leading-tight">
                 {{ __('Livros Disponíveis') }}
             </h2>
+            @livewire('biblioteca.carrinho.icone-carrinho')
         </div>
     </x-slot>
 

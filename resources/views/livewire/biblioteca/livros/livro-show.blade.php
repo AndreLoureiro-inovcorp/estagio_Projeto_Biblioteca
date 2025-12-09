@@ -3,6 +3,7 @@
         <h2 class="text-xl font-semibold text-gray-800 leading-tight">
             {{ __('Livro: ') }}{{ $livro->nome }}
         </h2>
+        @livewire('biblioteca.carrinho.icone-carrinho')
     </x-slot>
 
     @if(session('sucesso'))
@@ -10,7 +11,7 @@
         <span>{{ session('sucesso') }}</span>
     </div>
     @endif
-    
+
     <div class="max-w-4xl mx-auto mt-16 bg-base-100 shadow-md rounded-2xl px-6 py-8">
         <div class="flex flex-col sm:flex-row items-start gap-6">
             <figure class="flex-shrink-0">
@@ -48,6 +49,8 @@
                     @livewire('biblioteca.livros.solicitar-alerta', ['livroId' => $livro->id])
 
                     @livewire('biblioteca.requisitar-livro-direto', ['livroId' => $livro->id])
+
+                    @livewire('biblioteca.carrinho.adicionar-ao-carrinho', ['livroId' => $livro->id])
 
                     <a href="{{ route('livros.historico', $livro->id) }}" class="bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm px-4 py-2 rounded transition">
                         Histórico

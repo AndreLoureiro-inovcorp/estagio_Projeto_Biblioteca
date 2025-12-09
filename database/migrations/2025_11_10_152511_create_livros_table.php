@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('livros', function (Blueprint $table) {
+            
             $table->id();
             $table->text('isbn');
             $table->string('nome');
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->text('bibliografia')->nullable();
             $table->text('imagem_capa')->nullable();
             $table->boolean('disponivel')->default(true);
+            $table->boolean('disponivel_compra')->default(true);
             $table->decimal('preco', 8, 2)->nullable();
             $table->timestamps();
         });
