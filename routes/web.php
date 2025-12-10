@@ -7,6 +7,8 @@ use App\Livewire\Biblioteca\livros\Editoras;
 use App\Livewire\Biblioteca\livros\Livros;
 use App\Livewire\Biblioteca\LivroHistorico;
 use App\Livewire\Biblioteca\livros\LivroShow;
+use App\Livewire\Biblioteca\Carrinho\VerCarrinho;
+use App\Livewire\Biblioteca\Carrinho\CheckoutMorada;
 
 use App\Livewire\Biblioteca\admin\LivroCriar;
 use App\Livewire\Biblioteca\admin\LivroEditar;
@@ -35,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/editoras', Editoras::class)->name('editoras.index');
 
     Route::get('/biblioteca/livros/{livro}', LivroShow::class)->name('livros.show');
+
+    Route::get('/biblioteca/carrinho', VerCarrinho::class)->name('carrinho.ver');
+    Route::get('/biblioteca/checkout', CheckoutMorada::class)->name('checkout.morada');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

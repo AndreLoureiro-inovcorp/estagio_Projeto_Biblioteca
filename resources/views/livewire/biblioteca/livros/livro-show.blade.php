@@ -1,9 +1,11 @@
 <div>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800 leading-tight">
-            {{ __('Livro: ') }}{{ $livro->nome }}
-        </h2>
-        @livewire('biblioteca.carrinho.icone-carrinho')
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-800 leading-tight">
+                {{ __('Livro: ') }}{{ $livro->nome }}
+            </h2>
+            @livewire('biblioteca.carrinho.icone-carrinho')
+        </div>
     </x-slot>
 
     @if(session('sucesso'))
