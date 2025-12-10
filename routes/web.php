@@ -9,6 +9,7 @@ use App\Livewire\Biblioteca\LivroHistorico;
 use App\Livewire\Biblioteca\livros\LivroShow;
 use App\Livewire\Biblioteca\Carrinho\VerCarrinho;
 use App\Livewire\Biblioteca\Carrinho\CheckoutMorada;
+use App\Livewire\Biblioteca\Carrinho\CheckoutPagamento;
 
 use App\Livewire\Biblioteca\admin\LivroCriar;
 use App\Livewire\Biblioteca\admin\LivroEditar;
@@ -40,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/biblioteca/carrinho', VerCarrinho::class)->name('carrinho.ver');
     Route::get('/biblioteca/checkout', CheckoutMorada::class)->name('checkout.morada');
+    Route::get('/biblioteca/checkout/pagamento', CheckoutPagamento::class)->name('checkout.pagamento');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

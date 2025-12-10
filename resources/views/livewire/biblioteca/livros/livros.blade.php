@@ -4,7 +4,13 @@
             <h2 class="text-xl font-semibold text-gray-800 leading-tight">
                 {{ __('Livros Disponíveis') }}
             </h2>
+
+            <button wire:click="exportar" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded transition">
+                Exportar livros
+            </button>
+
             @livewire('biblioteca.carrinho.icone-carrinho')
+
         </div>
     </x-slot>
 
@@ -24,10 +30,6 @@
         </select>
 
         <input type="text" wire:model.live="pesquisa" placeholder="Pesquisa por nome do livro" class="input input-bordered w-full max-w-xs rounded-xl" />
-
-        <button wire:click="exportar" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded transition">
-            Exportar livros
-        </button>
 
     </div>
 
@@ -49,10 +51,13 @@
                         <strong>Autores:</strong>
                         {{ $livro->autores->pluck('nome')->join(', ') }}
                     </p>
-                    <p class="text-sm"><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
+                    <p class="text-sm"><strong>Preço:</strong> {{ number_format($livro->preco, 2, ',', '.') }} €</p>
 
-                    <div class="card-actions justify-end ">
-                        <a href="{{ route('livros.show', $livro->id) }}" class="btn btn-info">Ver Mais</a>
+                    <div class="card-actions justify-between mt-4">
+
+                        @livewire('biblioteca.carrinho.adicionar-ao-carrinho', ['livroId' => $livro->id])
+
+                        <a href="{{ route('livros.show', $livro->id) }}" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800">Ver Mais</a>
                     </div>
 
                 </div>

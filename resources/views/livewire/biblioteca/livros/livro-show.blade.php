@@ -38,7 +38,7 @@
                     @endforelse
                 </p>
                 <p><strong>ISBN:</strong> {{ $livro->isbn }}</p>
-                <p><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
+                <p><strong>Preço:</strong> {{ number_format($livro->preco, 2, ',', '.') }} €</p>
                 <p><strong>Disponibilidade:</strong>
                     @if($livro->disponivel)
                     <span class="badge badge-success">Disponível</span>
@@ -54,7 +54,7 @@
 
                     @livewire('biblioteca.carrinho.adicionar-ao-carrinho', ['livroId' => $livro->id])
 
-                    <a href="{{ route('livros.historico', $livro->id) }}" class="bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm px-4 py-2 rounded transition">
+                    <a href="{{ route('livros.historico', $livro->id) }}" class="btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium text-sm px-4 py-2 rounded transition">
                         Histórico
                     </a>
 

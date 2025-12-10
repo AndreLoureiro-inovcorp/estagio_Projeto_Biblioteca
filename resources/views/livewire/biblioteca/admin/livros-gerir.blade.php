@@ -51,7 +51,7 @@
                         @endforelse
                     </p>
                     <p><strong>ISBN:</strong> {{ $livro->isbn }}</p>
-                    <p><strong>Preço:</strong> €{{ number_format($livro->preco, 2, ',', '.') }}</p>
+                    <p><strong>Preço:</strong> {{ number_format($livro->preco, 2, ',', '.') }} €</p>
                     <p><strong>Disponibilidade:</strong>
                         @if($livro->disponivel)
                         <span class="badge badge-success">Disponível</span>

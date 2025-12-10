@@ -42,7 +42,7 @@
                         </p>
 
                         <p class="text-xl font-bold text-primary mt-2">
-                            €{{ number_format($item->livro->preco, 2, ',', '.') }}
+                            {{ number_format($item->livro->preco, 2, ',', '.') }} €
                         </p>
                     </div>
 
@@ -56,7 +56,7 @@
                         <p class="text-sm text-gray-700">
                             Subtotal:
                             <span class="font-semibold">
-                                €{{ number_format($item->quantidade * $item->livro->preco, 2, ',', '.') }}
+                                {{ number_format($item->quantidade * $item->livro->preco, 2, ',', '.') }} €
                             </span>
                         </p>
 
@@ -77,7 +77,7 @@
                     <span class="text-xl font-semibold text-gray-700">Total:</span>
 
                     <span class="text-3xl font-bold text-primary">
-                        €{{ number_format($totalCarrinho, 2, ',', '.') }}
+                        {{ number_format($totalCarrinho, 2, ',', '.') }} €
                     </span>
                 </div>
 
