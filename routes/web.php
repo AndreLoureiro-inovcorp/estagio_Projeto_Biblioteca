@@ -18,6 +18,7 @@ use App\Livewire\Biblioteca\admin\RequisicaoConfirmarDevolucao;
 use App\Livewire\Biblioteca\admin\GerirUtilizadores;
 use App\Livewire\Biblioteca\admin\UtilizadorHistorico;
 use App\Livewire\Biblioteca\admin\PesquisarLivrosApi;
+use App\Livewire\Biblioteca\Admin\GerirEncomendas;
 
 use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\Requisicoes;
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/reviews', GerirReviews::class)->name('admin.reviews');
     Route::get('/admin/reviews/{review}/recusar', RecusarReview::class)->name('admin.reviews.recusar');
+
+    Route::get('/admin/encomendas', GerirEncomendas::class)->name('admin.encomendas');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

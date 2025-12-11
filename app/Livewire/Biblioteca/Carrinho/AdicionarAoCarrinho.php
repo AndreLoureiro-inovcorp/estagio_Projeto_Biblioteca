@@ -23,10 +23,6 @@ class AdicionarAoCarrinho extends Component
 
         $livro = Livro::findOrFail($this->livroId);
 
-        if (!$livro->podeSerComprado()) {
-            return;
-        }
-
         $item = CarrinhoItem::where('user_id', auth()->id())->where('livro_id', $livro->id)->first();
 
         if ($item) {

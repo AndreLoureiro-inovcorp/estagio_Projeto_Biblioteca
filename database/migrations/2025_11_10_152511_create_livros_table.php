@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('bibliografia')->nullable();
             $table->text('imagem_capa')->nullable();
             $table->boolean('disponivel')->default(true);
-            $table->boolean('disponivel_compra')->default(true);
             $table->decimal('preco', 8, 2)->nullable();
             $table->timestamps();
         });

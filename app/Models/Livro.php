@@ -143,14 +143,4 @@ class Livro extends Model
     {
         return $this->hasMany(EncomendaItem::class);
     }
-
-    public function podeSerComprado()
-    {
-        return $this->disponivel_compra == true;
-    }
-
-    public function scopeDisponivelCompra($query)
-    {
-        return $query->where('disponivel_compra', true);
-    }
 }
