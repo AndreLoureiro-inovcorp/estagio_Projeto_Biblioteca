@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('app:lembrete-requisicoes')->dailyAt('08:00');
-Schedule::command('carrinho:lembrete')->everyMinute();
+Schedule::command('carrinho:lembrete')->hourly();
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());

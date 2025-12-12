@@ -12,11 +12,9 @@ class LembreteCarrinho extends Command
 {
     protected $signature = 'carrinho:lembrete';
 
-    protected $description = 'Envia um email para utilizadores com carrinho abandonado há mais de 1 hora';
-
     public function handle()
     {
-        $carrinhos = CarrinhoItem::with(['user', 'livro'])->where('created_at', '<=', now()->subHour())->get()->groupBy('user_id'); 
+        $carrinhos = CarrinhoItem::with(['user', 'livro'])->where('created_at', '<=', now()->subHour())->get()->groupBy('user_id');
 
         if ($carrinhos->isEmpty()) {
             return Command::SUCCESS;
