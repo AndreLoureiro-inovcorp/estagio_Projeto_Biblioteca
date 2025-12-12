@@ -17,7 +17,7 @@ class AdicionarAoCarrinho extends Component
 
     public function adicionar()
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return redirect()->route('login');
         }
 
@@ -37,7 +37,8 @@ class AdicionarAoCarrinho extends Component
 
         $this->dispatch('carrinho-atualizado');
 
-        return redirect()->route('livros.show', $livro->id)->with('sucesso', 'Livro adicionado ao carrinho!');
+        session()->flash('sucesso', 'Livro adicionado ao carrinho!');
+        $this->dispatch('carrinho-atualizado');
     }
 
     public function render()
@@ -49,4 +50,3 @@ class AdicionarAoCarrinho extends Component
         ]);
     }
 }
-

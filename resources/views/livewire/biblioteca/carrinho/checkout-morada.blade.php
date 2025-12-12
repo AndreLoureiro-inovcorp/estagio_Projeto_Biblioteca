@@ -53,7 +53,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo *</label>
-                            <input type="text" wire:model="nome_completo" class="input input-bordered w-full @error('nome_completo') input-error @enderror" placeholder="João Silva" />
+                            <input type="text" wire:model="nome_completo" class="input input-bordered w-full @error('nome_completo') input-error @enderror" />
                             @error('nome_completo')
                             <span class="text-error text-sm">{{ $message }}</span>
                             @enderror
@@ -61,7 +61,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Morada *</label>
-                            <input type="text" wire:model="morada" class="input input-bordered w-full @error('morada') input-error @enderror" placeholder="Rua Principal, 123" />
+                            <input type="text" wire:model="morada" class="input input-bordered w-full @error('morada') input-error @enderror" />
                             @error('morada')
                             <span class="text-error text-sm">{{ $message }}</span>
                             @enderror
@@ -70,7 +70,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Cidade *</label>
-                                <input type="text" wire:model="cidade" class="input input-bordered w-full @error('cidade') input-error @enderror" placeholder="Lisboa" />
+                                <input type="text" wire:model="cidade" class="input input-bordered w-full @error('cidade') input-error @enderror" />
                                 @error('cidade')
                                 <span class="text-error text-sm">{{ $message }}</span>
                                 @enderror
@@ -78,7 +78,7 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
-                                <input type="text" wire:model="codigo_postal" class="input input-bordered w-full @error('codigo_postal') input-error @enderror" placeholder="1000-000" maxlength="8" />
+                                <input type="text" wire:model="codigo_postal" class="input input-bordered w-full @error('codigo_postal') input-error @enderror" maxlength="8" />
                                 @error('codigo_postal')
                                 <span class="text-error text-sm">{{ $message }}</span>
                                 @enderror
@@ -89,7 +89,7 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">País *</label>
-                                <input type="text" wire:model="pais" class="input input-bordered w-full @error('pais') input-error @enderror" placeholder="Portugal" />
+                                <input type="text" wire:model="pais" class="input input-bordered w-full @error('pais') input-error @enderror"/>
                                 @error('pais')
                                 <span class="text-error text-sm">{{ $message }}</span>
                                 @enderror
@@ -97,7 +97,7 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Telefone *</label>
-                                <input type="tel" wire:model="telefone" class="input input-bordered w-full @error('telefone') input-error @enderror" placeholder="912345678" maxlength="9" />
+                                <input type="tel" wire:model="telefone" class="input input-bordered w-full @error('telefone') input-error @enderror" maxlength="9" />
                                 @error('telefone')
                                 <span class="text-error text-sm">{{ $message }}</span>
                                 @enderror
@@ -111,7 +111,7 @@
                             </button>
 
                             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition">
-                                Continuar para Pagamento →
+                                Continuar para Pagamento
                             </button>
                         </div>
 

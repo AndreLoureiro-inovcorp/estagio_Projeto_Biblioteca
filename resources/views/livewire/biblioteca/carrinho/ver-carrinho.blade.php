@@ -88,7 +88,7 @@
                     </a>
 
                     <a href="{{ route('checkout.morada') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition">
-                        Finalizar Compra
+                        Continuar para os dados de entrega
                     </a>
 
                 </div>

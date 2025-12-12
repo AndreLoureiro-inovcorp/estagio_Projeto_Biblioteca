@@ -29,9 +29,7 @@ class CheckoutPagamento extends Component
             return redirect()->route('checkout.morada');
         }
 
-        $this->itensCarrinho = CarrinhoItem::where('user_id', auth()->id())
-            ->with('livro')
-            ->get();
+        $this->itensCarrinho = CarrinhoItem::where('user_id', auth()->id())->with('livro')->get();
 
         if ($this->itensCarrinho->isEmpty()) {
             session()->flash('error', 'O teu carrinho está vazio!');
