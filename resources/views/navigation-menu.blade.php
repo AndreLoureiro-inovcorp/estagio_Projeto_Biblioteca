@@ -24,26 +24,49 @@
                     <x-nav-link href="{{ route('requisicoes.index') }}" :active="request()->routeIs('requisicoes.*')">
                         {{ __('Requisições') }}
                     </x-nav-link>
+
                     @role('admin')
-                    <x-nav-link href="{{ route('admin.utilizadores') }}" :active="request()->routeIs('admin.utilizadores')">
-                        {{ __('Gerir Utilizadores') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('admin.livros') }}" :active="request()->routeIs('admin.livros')">
-                        {{ __('Gerir Livros') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('admin.encomendas') }}" :active="request()->routeIs('admin.encomendas')">
-                        {{ __('Gerir encomendas') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('admin.reviews') }}" :active="request()->routeIs('admin.reviews')">
-                        {{ __('Gerir Reviews') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('admin.pesquisar-livros-api') }}" :active="request()->routeIs('admin.pesquisar-livros-api')">
-                        {{ __('Pesquisar API') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('admin.logs') }}" :active="request()->routeIs('admin.logs')">
-                        {{ __('Logs') }}
-                    </x-nav-link>
+                    <div class="relative flex items-center">
+                        <div class="relative group">
+
+                            <button type="button" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 transition">
+                                Gestão
+                                <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <div class="absolute left-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+
+                                <a href="{{ route('admin.utilizadores') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Gerir Utilizadores
+                                </a>
+
+                                <a href="{{ route('admin.livros') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Gerir Livros
+                                </a>
+
+                                <a href="{{ route('admin.encomendas') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Gerir Encomendas
+                                </a>
+
+                                <a href="{{ route('admin.reviews') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Gerir Reviews
+                                </a>
+
+                                <a href="{{ route('admin.pesquisar-livros-api') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Adicionar com a API
+                                </a>
+
+                                <a href="{{ route('admin.logs') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                    Logs
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
                     @endrole
+
                 </div>
             </div>
 

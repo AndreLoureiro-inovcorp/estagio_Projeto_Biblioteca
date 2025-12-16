@@ -76,6 +76,12 @@ class CheckoutPagamento extends Component
 
                 $encomenda = $this->criarEncomenda($paymentIntent);
 
+                LogService::registar(
+                'Encomendas',
+                'Criou encomenda',
+                "{$encomenda->numero_encomenda} - " . number_format($encomenda->valor_total, 2) . "€ - {$this->itensCarrinho->count()} livros"
+            );
+
                 CarrinhoItem::where('user_id', auth()->id())->delete();
                 session()->forget('checkout_morada');
 

@@ -25,6 +25,7 @@
                             <th>Ação</th>
                             <th>Descrição</th>
                             <th>IP</th>
+                            <th>Browser</th>
                         </tr>
                     </thead>
 
@@ -39,10 +40,8 @@
                                 {{ $log->user->name }}
                             </td>
 
-                            <td>
-                                <span class="badge badge-outline">
-                                    {{ $log->modulo }}
-                                </span>
+                            <td class="text-sm text-gray-600">
+                                {{ $log->modulo }}
                             </td>
 
                             <td class="font-medium text-gray-800">
@@ -55,6 +54,10 @@
 
                             <td class="text-xs text-gray-500">
                                 {{ $log->ip }}
+                            </td>
+
+                            <td class="text-sm text-gray-600">
+                                {{ $log->browser_name }}
                             </td>
                         </tr>
                         @endforeach

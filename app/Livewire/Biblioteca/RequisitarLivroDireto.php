@@ -7,6 +7,7 @@ use App\Models\Requisicao;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Services\LogService;
 
 class RequisitarLivroDireto extends Component
 {
@@ -27,7 +28,7 @@ class RequisitarLivroDireto extends Component
             return;
         }
 
-        Requisicao::create([
+        $requisicao = Requisicao::create([
             'livro_id' => $livro->id,
             'user_id' => Auth::id(),
             'estado' => 'ativa',
@@ -37,6 +38,12 @@ class RequisitarLivroDireto extends Component
         ]);
 
         $livro->update(['disponivel' => false]);
+
+        LogService::registar(
+            'Requisições',
+            'Criou requisição',
+            "{$requisicao->numero_requisicao} - {$livro->nome}"
+        );
 
         return redirect()->route('livros.show', $livro->id)->with('sucesso', 'Livro requisitado com sucesso.');
     }

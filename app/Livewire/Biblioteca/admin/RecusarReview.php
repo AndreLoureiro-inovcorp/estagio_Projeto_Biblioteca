@@ -7,6 +7,7 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Services\LogService;
 
 #[Layout('layouts.app')]
 class RecusarReview extends Component
@@ -40,6 +41,12 @@ class RecusarReview extends Component
         $review->refresh();
 
         Mail::to($review->user->email)->send(new ReviewRecusada($review));
+
+        LogService::registar(
+            'Reviews',
+            'Rejeitou review',
+            "Review #{$review->id} - {$review->livro->nome}"
+        );
 
         session()->flash('success', 'Review recusado com sucesso.');
 

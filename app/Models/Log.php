@@ -18,6 +18,38 @@ class Log extends Model
         'user_agent',
     ];
 
+    public function getBrowserNameAttribute(): string
+    {
+        return $this->detetarBrowser($this->user_agent);
+    }
+
+    private function detetarBrowser(?string $agent): string
+    {
+        $agent = strtolower($agent ?? '');
+
+        if (str_contains($agent, 'edg')) {
+            return 'Edge';
+        }
+
+        if (str_contains($agent, 'chrome')) {
+            return 'Chrome';
+        }
+
+        if (str_contains($agent, 'firefox')) {
+            return 'Firefox';
+        }
+
+        if (str_contains($agent, 'safari')) {
+            return 'Safari';
+        }
+
+        if (str_contains($agent, 'opera') || str_contains($agent, 'opr')) {
+            return 'Opera';
+        }
+
+        return 'Desconhecido';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
