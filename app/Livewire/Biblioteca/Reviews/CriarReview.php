@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Biblioteca\Reviews;
 
+use App\Mail\NovaReviewAdmin;
 use App\Models\Requisicao;
 use App\Models\Review;
+use App\Services\LogService;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use App\Mail\NovaReviewAdmin;
-use Illuminate\Support\Facades\Mail;
 
 #[Layout('layouts.app')]
 class CriarReview extends Component
@@ -31,12 +32,6 @@ class CriarReview extends Component
             abort(403);
         }
 
-        if ($this->requisicao->estado != 'entregue') {
-            session()->flash('error', 'Tens de devolver o livro antes de avaliar.');
-
-            return redirect()->route('requisicoes.index');
-        }
-
         if ($this->requisicao->review()->exists()) {
             session()->flash('error', 'Já fizeste uma review deste livro.');
 
@@ -57,6 +52,12 @@ class CriarReview extends Component
         ]);
 
         Mail::to('admin@biblioteca.pt')->send(new NovaReviewAdmin($review));
+
+        LogService::registar(
+            'Reviews',
+            'Criou review',
+            "Review #{$review->id} - {$this->requisicao->livro->nome}"
+        );
 
         session()->flash('success', 'Obrigado pela tua review!');
 

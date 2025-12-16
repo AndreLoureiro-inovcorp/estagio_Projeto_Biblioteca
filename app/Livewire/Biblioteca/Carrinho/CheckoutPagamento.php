@@ -9,6 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
+use App\Services\LogService;
 
 #[Layout('layouts.app')]
 class CheckoutPagamento extends Component

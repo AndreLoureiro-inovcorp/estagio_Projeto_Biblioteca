@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Biblioteca\admin;
 
-use Livewire\Component;
-use App\Models\Livro;
-use App\Models\Editora;
 use App\Models\Autor;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Editora;
+use App\Models\Livro;
+use App\Services\LogService;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.app')]
 class LivroEditar extends Component
@@ -16,16 +16,25 @@ class LivroEditar extends Component
     use WithFileUploads;
 
     public $livroId;
+
     public $isbn;
+
     public $nome;
+
     public $editora_id;
+
     public $autoresSelecionados = [];
+
     public $bibliografia;
+
     public $nova_imagem;
+
     public $imagem_capa;
+
     public $preco;
 
     public $editoras = [];
+
     public $autores = [];
 
     public function mount($livro)
@@ -48,7 +57,7 @@ class LivroEditar extends Component
     protected function rules()
     {
         return [
-            'isbn' => 'required|string|max:20|unique:livros,isbn,' . $this->livroId,
+            'isbn' => 'required|string|max:20|unique:livros,isbn,'.$this->livroId,
             'nome' => 'required|string|max:255',
             'editora_id' => 'required|exists:editoras,id',
             'autoresSelecionados' => 'required|array|min:1',
@@ -78,7 +87,14 @@ class LivroEditar extends Component
         $livro->save();
         $livro->autores()->sync($this->autoresSelecionados);
 
+        LogService::registar(
+            'Livros',
+            'Editou livro',
+            "#{$livro->id} - {$livro->nome}"
+        );
+
         session()->flash('message', 'Livro atualizado com sucesso!');
+
         return redirect()->route('admin.livros');
     }
 

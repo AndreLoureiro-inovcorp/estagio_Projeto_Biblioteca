@@ -5,6 +5,7 @@ namespace App\Livewire\Biblioteca\admin;
 use App\Mail\LivroDisponivel;
 use App\Models\AlertaLivro;
 use App\Models\Requisicao;
+use App\Services\LogService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
@@ -59,6 +60,12 @@ class RequisicaoConfirmarDevolucao extends Component
 
         $this->requisicao->livro->update(['disponivel' => true]);
 
+        LogService::registar(
+            'Requisições',
+            'Devolveu livro',
+            "{$this->requisicao->numero_requisicao} - {$this->requisicao->livro->nome}"
+        );
+
         $this->notificarAlertasPendentes();
 
         session()->flash('message', 'Devolução confirmada com sucesso!');
@@ -68,25 +75,14 @@ class RequisicaoConfirmarDevolucao extends Component
 
     public function notificarAlertasPendentes()
     {
-        $alertasPendentes = AlertaLivro::pendente()
-            ->porLivro($this->requisicao->livro_id)
-            ->with('user')
-            ->get();
+        $alertasPendentes = AlertaLivro::pendente()->porLivro($this->requisicao->livro_id)->with('user')->get();
 
         foreach ($alertasPendentes as $alerta) {
-            try {
-                Mail::to($alerta->user->email)->send(
-                    new LivroDisponivel($this->requisicao->livro, $alerta->user)
-                );
+            Mail::to($alerta->user->email)->send(
+                new LivroDisponivel($this->requisicao->livro, $alerta->user)
+            );
 
-                $alerta->marcarComoNotificado();
-
-            } catch (\Exception $e) {
-                logger()->error('Erro ao enviar email de alerta: '.$e->getMessage(), [
-                    'alerta_id' => $alerta->id,
-                    'livro_id' => $this->requisicao->livro_id,
-                ]);
-            }
+            $alerta->marcarComoNotificado();
         }
     }
 

@@ -40,6 +40,9 @@
                     <x-nav-link href="{{ route('admin.pesquisar-livros-api') }}" :active="request()->routeIs('admin.pesquisar-livros-api')">
                         {{ __('Pesquisar API') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('admin.logs') }}" :active="request()->routeIs('admin.logs')">
+                        {{ __('Logs') }}
+                    </x-nav-link>
                     @endrole
                 </div>
             </div>

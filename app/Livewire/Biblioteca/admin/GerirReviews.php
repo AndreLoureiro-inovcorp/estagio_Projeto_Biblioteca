@@ -7,6 +7,7 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Services\LogService;
 
 #[Layout('layouts.app')]
 class GerirReviews extends Component
@@ -17,6 +18,12 @@ class GerirReviews extends Component
 
         $review->aprovar();
 
+        LogService::registar(
+            'Reviews',
+            'Aprovou review',
+            "Review #{$review->id} - {$review->livro->nome}"
+        );
+
         Mail::to($review->user->email)->send(new ReviewAprovada($review));
 
         session()->flash('success', 'Review aprovado com sucesso!');
@@ -26,26 +33,23 @@ class GerirReviews extends Component
     {
         $review = Review::findOrFail($reviewId);
 
-        if ($review->estado !== 'recusado') {
-            session()->flash('error', 'Só é possível eliminar reviews recusadas.');
-
-            return;
-        }
-
         $nomeUser = $review->user->name;
         $nomeLivro = $review->livro->nome;
 
         $review->delete();
+
+        LogService::registar(
+            'Reviews',
+            'Rejeitou review',
+            "Review #{$review->id} - {$review->livro->nome}"
+        );
 
         session()->flash('success', "Review de {$nomeUser} sobre '{$nomeLivro}' foi eliminada. O utilizador pode agora submeter uma nova review.");
     }
 
     public function render()
     {
-        $reviews = Review::whereIn('estado', ['suspenso', 'recusado'])
-            ->with(['user', 'livro', 'requisicao'])
-            ->latest()
-            ->get();
+        $reviews = Review::whereIn('estado', ['suspenso', 'recusado'])->with(['user', 'livro', 'requisicao'])->latest()->get();
 
         return view('livewire.biblioteca.admin.gerir-reviews', [
             'reviews' => $reviews,

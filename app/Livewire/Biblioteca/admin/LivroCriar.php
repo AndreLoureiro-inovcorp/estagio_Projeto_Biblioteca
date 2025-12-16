@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Biblioteca\admin;
 
-use Livewire\Component;
-use App\Models\Livro;
-use App\Models\Editora;
 use App\Models\Autor;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Editora;
+use App\Models\Livro;
+use App\Services\LogService;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.app')]
 class LivroCriar extends Component
@@ -16,14 +16,21 @@ class LivroCriar extends Component
     use WithFileUploads;
 
     public $isbn = '';
+
     public $nome = '';
+
     public $editora_id = '';
+
     public $autoresSelecionados = [];
+
     public $bibliografia = '';
+
     public $nova_imagem = null;
+
     public $preco = '';
 
     public $editoras = [];
+
     public $autores = [];
 
     public function mount()
@@ -80,7 +87,14 @@ class LivroCriar extends Component
         $livro = Livro::create($dados);
         $livro->autores()->sync($this->autoresSelecionados);
 
+        LogService::registar(
+            'Livros',
+            'Criou livro',
+            "{$livro->nome} - ".$livro->autores->pluck('nome')->join(', ')
+        );
+
         session()->flash('message', 'Livro criado com sucesso!');
+
         return redirect()->route('admin.livros');
     }
 

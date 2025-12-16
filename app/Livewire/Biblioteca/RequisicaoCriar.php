@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Biblioteca;
 
+use App\Mail\NovaRequisicaoAdmin;
+use App\Mail\RequisicaoConfirmada;
 use App\Models\Livro;
 use App\Models\Requisicao;
+use App\Models\User;
+use App\Services\LogService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use App\Mail\RequisicaoConfirmada;
-use App\Mail\NovaRequisicaoAdmin;
-use App\Models\User;
 
 #[Layout('layouts.app')]
 
@@ -91,7 +92,13 @@ class RequisicaoCriar extends Component
 
         $livro->update(['disponivel' => false]);
 
-        Mail::to($user->email)->send(new RequisicaoConfirmada($requisicao));
+        LogService::registar(
+            'Requisições',
+            'Criou requisição',
+            "{$requisicao->numero_requisicao} - {$livro->nome}"
+        );
+
+        //Mail::to($user->email)->send(new RequisicaoConfirmada($requisicao));
 
         $admins = User::role('admin')->get();
         foreach ($admins as $admin) {
