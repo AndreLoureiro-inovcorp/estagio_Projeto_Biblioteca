@@ -17,7 +17,8 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    
+    $response->assertRedirect('/biblioteca/livros');
 });
 
 test('users cannot authenticate with invalid password', function () {
