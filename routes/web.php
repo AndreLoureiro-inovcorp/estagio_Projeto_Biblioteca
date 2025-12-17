@@ -18,8 +18,8 @@ use App\Livewire\Biblioteca\admin\RequisicaoConfirmarDevolucao;
 use App\Livewire\Biblioteca\admin\GerirUtilizadores;
 use App\Livewire\Biblioteca\admin\UtilizadorHistorico;
 use App\Livewire\Biblioteca\admin\PesquisarLivrosApi;
-use App\Livewire\Biblioteca\Admin\GerirEncomendas;
-use App\Livewire\Biblioteca\Admin\GerirLogs;
+use App\Livewire\Biblioteca\admin\GerirEncomendas;
+use App\Livewire\Biblioteca\admin\GerirLogs;
 
 use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\Requisicoes;

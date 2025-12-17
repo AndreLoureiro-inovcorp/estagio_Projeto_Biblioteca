@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Biblioteca\Admin;
+namespace App\Livewire\Biblioteca\admin;
 
 use App\Models\Log;
 use Livewire\Attributes\Layout;
