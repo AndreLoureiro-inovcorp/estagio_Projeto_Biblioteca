@@ -69,4 +69,16 @@ class UserFactory extends Factory
             'ownedTeams'
         );
     }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'cidadao']);
+
+            $user->assignRole($role);
+        });
+    }
 }

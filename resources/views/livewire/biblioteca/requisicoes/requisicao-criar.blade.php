@@ -41,7 +41,7 @@
             <div class="bg-base-200 p-6 rounded-xl mb-6 space-y-4">
                 <div class="flex flex-col md:flex-row gap-6">
                     <figure class="flex-shrink-0">
-                        <img src="{{ $livro->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livro->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
+                        <img src="{{ $livroSelecionado->imagem_capa ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp' }}" alt="{{ $livroSelecionado->nome }}" class="w-48 h-64 object-cover rounded-lg shadow-md" />
                     </figure>
 
                     <div class="flex-1 space-y-2">
