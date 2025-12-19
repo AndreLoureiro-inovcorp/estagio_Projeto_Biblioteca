@@ -98,7 +98,7 @@ class RequisicaoCriar extends Component
             "{$requisicao->numero_requisicao} - {$livro->nome}"
         );
 
-        //Mail::to($user->email)->send(new RequisicaoConfirmada($requisicao));
+        Mail::to($user->email)->send(new RequisicaoConfirmada($requisicao));
 
         $admins = User::role('admin')->get();
         foreach ($admins as $admin) {

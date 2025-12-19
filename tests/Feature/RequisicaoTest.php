@@ -10,8 +10,8 @@ use App\Livewire\Biblioteca\RequisicaoCriar;
 use App\Livewire\Biblioteca\admin\RequisicaoConfirmarDevolucao;
 use App\Livewire\Biblioteca\Requisicoes;
 
-// TESTE 1: Pode criar requisição
-test('pode criar requisicao', function () {
+// TESTE 1: Pode criar uma requisição
+test('utilizador pode criar uma requisicao', function () {
     Mail::fake();
 
     Role::create(['name' => 'admin']);
@@ -29,8 +29,8 @@ test('pode criar requisicao', function () {
     ]);
 });
 
-// TESTE 2: Não pode criar requisição sem livro válido
-test('nao cria requisicao sem livro valido', function () {
+// TESTE 2: Não pode criar requisição sem um livro válido
+test('nao cria uma requisicao sem um livro valido', function () {
     Mail::fake();
 
     Role::create(['name' => 'admin']);
@@ -38,17 +38,13 @@ test('nao cria requisicao sem livro valido', function () {
 
     $user = User::factory()->create();
 
-    Livewire::actingAs($user)
-        ->test(RequisicaoCriar::class)
-        ->set('livro_id', '')
-        ->call('criar')
-        ->assertHasErrors(['livro_id']);
+    Livewire::actingAs($user)->test(RequisicaoCriar::class)->set('livro_id', '')->call('criar')->assertHasErrors(['livro_id']);
 
     $this->assertDatabaseCount('requisicaos', 0);
 });
 
-// TESTE 3: Admin pode confirmar devolução de livro
-test('admin pode devolver livro', function () {
+// TESTE 3: Confirma que um utilizador pode devolver um livro
+test('utilizador pode devolver um livro', function () {
     Mail::fake();
 
     Role::create(['name' => 'admin']);
@@ -70,10 +66,7 @@ test('admin pode devolver livro', function () {
         'estado' => 'ativa',
     ]);
 
-    Livewire::actingAs($admin)
-        ->test(RequisicaoConfirmarDevolucao::class, ['requisicao' => $requisicao->id])
-        ->set('data_entrega_real', now()->format('Y-m-d'))
-        ->call('confirmar');
+    Livewire::actingAs($admin)->test(RequisicaoConfirmarDevolucao::class, ['requisicao' => $requisicao->id])->set('data_entrega_real', now()->format('Y-m-d'))->call('confirmar');
 
     $this->assertDatabaseHas('requisicaos', [
         'id' => $requisicao->id,
@@ -86,8 +79,8 @@ test('admin pode devolver livro', function () {
     ]);
 });
 
-// TESTE 4: User vê apenas suas requisições
-test('user ve apenas suas requisicoes', function () {
+// TESTE 4: Garante que o utilizador vê apenas suas requisições
+test('utilizador ve apenas as suas requisicoes', function () {
     Mail::fake();
 
     Role::create(['name' => 'admin']);
@@ -132,8 +125,8 @@ test('user ve apenas suas requisicoes', function () {
     $component->assertSee('REQ-0001') ->assertSee('REQ-0002')->assertDontSee('REQ-0003');
 });
 
-// TESTE 5: Não pode requisitar livro indisponível
-test('nao pode requisitar livro indisponivel', function () {
+// TESTE 5: Confirma que um utilizador não pode requisitar um livro indisponível
+test('utilizador nao pode requisitar um livro indisponivel', function () {
     Mail::fake();
 
     Role::create(['name' => 'admin']);
